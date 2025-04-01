@@ -12,9 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Robbe360",
-  description: "Encuentra la propiedad ideal y digitaliza tu negocio con un experto en bienes raíces y desarrollo web.",
+export const metadata = {
+  title: "Robbe | Asesoría Inmobiliaria & Desarrollo Web",
+  description: "Te ayudo a encontrar la propiedad ideal y digitalizar tu negocio con soluciones modernas.",
+  icons: { icon: '/favicon.ico' },
 };
 
 export default function RootLayout({
