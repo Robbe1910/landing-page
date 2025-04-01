@@ -14,17 +14,41 @@ export default function Home() {
   const whatsappNumber = "634984021";
   const whatsappMessage = "Hola, me gustaría obtener más información.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-  
+
   const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
 
 
   return (
     <>
       <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Asesor Inmobiliario & Desarrollador Web",
+              url: "https://robbe360.com",
+              description:
+                "Encuentra la propiedad ideal y digitaliza tu negocio con un experto en bienes raíces y desarrollo web.",
+              address: {
+                "@type": "Person",
+                streetAddress: "Calle Olimpiada 2",
+                addressLocality: "Coria",
+                addressRegion: "Caceres",
+                postalCode: "10800",
+                addressCountry: "España",
+              },
+              telephone: "+34634984021",
+            }),
+          }}
+        />
+
+
         <title>Asesor Inmobiliario & Desarrollador Web</title>
         <meta name="description" content="Encuentra la propiedad ideal y digitaliza tu negocio con un experto en bienes raíces y desarrollo web." />
 
-         {/* Open Graph / Facebook / LinkedIn */}
+        {/* Open Graph / Facebook / LinkedIn */}
         <meta property="og:title" content="Asesor Inmobiliario & Desarrollador Web" />
         <meta
           property="og:description"
@@ -33,7 +57,7 @@ export default function Home() {
         {/* 
         <meta property="og:image" content="https://robbe360.com/imagen-og.jpg" />
         */}
-        
+
         <meta property="og:url" content="https://robbe360.com" />
         <meta property="og:type" content="website" />
 
@@ -47,7 +71,7 @@ export default function Home() {
         {/*
         <meta name="twitter:image" content="https://robbe360.com/imagen-og.jpg" />
         // */}
-        
+
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -55,7 +79,7 @@ export default function Home() {
         {/* Hero Section */}
         <header className="h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
           {isClient && (
-            <motion.h1 
+            <motion.h1
               className="text-5xl font-bold"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -65,7 +89,7 @@ export default function Home() {
             </motion.h1>
           )}
           {isClient && (
-            <motion.p 
+            <motion.p
               className="text-lg mt-4"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,9 +99,9 @@ export default function Home() {
             </motion.p>
           )}
           {isClient && (
-            <motion.a 
-              href={googleCalendarLink} 
-              target="_blank" 
+            <motion.a
+              href={googleCalendarLink}
+              target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition duration-300"
               whileHover={{ scale: 1.05 }}
@@ -100,7 +124,7 @@ export default function Home() {
           <h2 className="text-3xl font-semibold">Servicios</h2>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             {isClient && (
-              <motion.div 
+              <motion.div
                 className="p-6 bg-white rounded-lg shadow-md"
                 whileHover={{ scale: 1.05 }}
               >
@@ -109,7 +133,7 @@ export default function Home() {
               </motion.div>
             )}
             {isClient && (
-              <motion.div 
+              <motion.div
                 className="p-6 bg-white rounded-lg shadow-md"
                 whileHover={{ scale: 1.05 }}
               >
@@ -125,9 +149,9 @@ export default function Home() {
           <h2 className="text-3xl font-semibold">Contacto</h2>
           <p className="mt-4">Envíame un mensaje para más información.</p>
           {isClient && (
-            <motion.a 
-              href={whatsappLink} 
-              target="_blank" 
+            <motion.a
+              href={whatsappLink}
+              target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-block px-6 py-3 bg-green-600 text-white rounded-lg shadow-lg hover:bg-green-700 transition duration-300"
               whileHover={{ scale: 1.05 }}

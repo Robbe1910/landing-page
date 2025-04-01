@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://robbe360.com
+
+# Sitemaps
+Sitemap: https://robbe360.com/sitemap.xml
