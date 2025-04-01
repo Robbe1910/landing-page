@@ -11,11 +11,11 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
-  const whatsappNumber = "634984021"; // Reemplaza con tu número en formato internacional sin +
+  const whatsappNumber = "634984021";
   const whatsappMessage = "Hola, me gustaría obtener más información.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   
-  const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9"; // Reemplaza con tu enlace
+  const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
 
 
   return (
@@ -30,8 +30,11 @@ export default function Home() {
           property="og:description"
           content="Encuentra la propiedad ideal y digitaliza tu negocio con un experto en bienes raíces y desarrollo web."
         />
-        <meta property="og:image" content="https://tusitio.com/imagen-og.jpg" />
-        <meta property="og:url" content="https://tusitio.com" />
+        {/* 
+        <meta property="og:image" content="https://robbe360.com/imagen-og.jpg" />
+        */}
+        
+        <meta property="og:url" content="https://robbe360.com" />
         <meta property="og:type" content="website" />
 
         {/* Twitter */}
@@ -41,7 +44,10 @@ export default function Home() {
           name="twitter:description"
           content="Encuentra la propiedad ideal y digitaliza tu negocio con un experto en bienes raíces y desarrollo web."
         />
-        <meta name="twitter:image" content="https://tusitio.com/imagen-og.jpg" />
+        {/*
+        <meta name="twitter:image" content="https://robbe360.com/imagen-og.jpg" />
+        // */}
+        
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
