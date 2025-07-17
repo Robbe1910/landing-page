@@ -47,7 +47,7 @@ export default function Home() {
             animate={{ y: 0 }}
             transition={{ duration: 1 }}
           >
-            Asesor Inmobiliario & Desarrollador Web
+            Desarrollador Web
           </motion.h1>
         )}
 
@@ -58,7 +58,7 @@ export default function Home() {
             animate={{ y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            Encuentra la propiedad ideal y digitaliza tu negocio fácilmente
+            Digitaliza tu negocio fácilmente
           </motion.p>
         )}
 
@@ -80,7 +80,6 @@ export default function Home() {
         <h2 className="text-3xl font-semibold">Sobre Mí</h2>
         <p className="mt-4 text-lg max-w-2xl mx-auto">
           Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js. 
-          Actualmente también soy asesor inmobiliario, combinando tecnología con bienes raíces para mejorar tu experiencia.
         </p>
         <a
           href="https://www.linkedin.com/in/roberto-berrendo-eguino-475b36171/"
@@ -95,16 +94,7 @@ export default function Home() {
       {/* Servicios */}
       <section className="py-16 px-6 bg-white text-center">
         <h2 className="text-3xl font-semibold text-black">Servicios</h2>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div
-            className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-xl border-l-4 border-l-lime-500"
-            whileHover={{ scale: 1.05 }}
-          >
-            <h3 className="text-xl font-bold text-black">Asesoría Inmobiliaria</h3>
-            <p className="mt-2 text-gray-700">
-              Compra, venta y alquiler de propiedades con asesoramiento personalizado.
-            </p>
-          </motion.div>
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-1 gap-6">
           <motion.div
             className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-xl border-l-4 border-l-lime-500"
             whileHover={{ scale: 1.05 }}

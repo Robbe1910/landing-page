@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Robbe | Asesoría Inmobiliaria & Desarrollo Web",
-  description: "Te ayudo a encontrar la propiedad ideal y digitalizar tu negocio con soluciones modernas.",
+  title: "Robbe | Desarrollo Web",
+  description: "Te ayudo a digitalizar tu negocio con soluciones modernas.",
   icons: { icon: '/favicon.ico' },
 };
 
