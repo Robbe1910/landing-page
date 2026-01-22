@@ -10,7 +10,7 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
-  const whatsappNumber = "634984021";
+  const whatsappNumber = "609881656";
   const whatsappMessage = "Hola, me gustaría obtener más información.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
