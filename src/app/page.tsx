@@ -16,22 +16,28 @@ export default function Home() {
   const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
   const projectHighlights = [
     {
-      title: "Landing para gimnasio",
+      title: "Clon Spotify",
       description:
-        "Experiencia dinámica con horarios, clases y formulario de inscripción integrado.",
-      tags: ["Diseño web", "Conversión", "Responsive"],
+        "Interfaz inmersiva con playlists, reproductor fijo y microinteracciones.",
+      tags: ["Clone UI", "Streaming", "Dark UI"],
     },
     {
-      title: "App de reservas gastronómicas",
+      title: "Clon Disney+",
       description:
-        "Pantallas tipo Uber Eats con filtros, menú visual y reservas en tiempo real.",
-      tags: ["UI/UX", "Apps conocidas", "Prototipo"],
+        "Galerías cinematográficas, carruseles y navegación por categorías.",
+      tags: ["Clone UI", "Motion", "Catalogo"],
     },
     {
-      title: "E-commerce de moda",
+      title: "Kebab house",
       description:
-        "Catálogo visual, checkout simple y automatizaciones para redes sociales.",
-      tags: ["Tienda online", "Branding", "Automatización"],
+        "Landing con menú visual, pedidos rápidos y ubicación destacada.",
+      tags: ["Restaurantes", "Delivery", "Conversión"],
+    },
+    {
+      title: "Peluquería & barbería",
+      description:
+        "Reserva online, galería de cortes y CTA directo a WhatsApp.",
+      tags: ["Beauty", "Reservas", "Branding"],
     },
   ];
 
@@ -156,7 +162,7 @@ export default function Home() {
             Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca.
           </p>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
           {projectHighlights.map((project) => (
             <motion.article
               key={project.title}
