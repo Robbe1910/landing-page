@@ -20,24 +20,32 @@ export default function Home() {
       description:
         "Interfaz inmersiva con playlists, reproductor fijo y microinteracciones.",
       tags: ["Clone UI", "Streaming", "Dark UI"],
+      githubUrl: "",
+      liveUrl: "",
     },
     {
       title: "Clon Disney+",
       description:
         "Galerías cinematográficas, carruseles y navegación por categorías.",
       tags: ["Clone UI", "Motion", "Catalogo"],
+      githubUrl: "",
+      liveUrl: "",
     },
     {
       title: "Kebab house",
       description:
         "Landing con menú visual, pedidos rápidos y ubicación destacada.",
       tags: ["Restaurantes", "Delivery", "Conversión"],
+      githubUrl: "",
+      liveUrl: "",
     },
     {
       title: "Peluquería & barbería",
       description:
         "Reserva online, galería de cortes y CTA directo a WhatsApp.",
       tags: ["Beauty", "Reservas", "Branding"],
+      githubUrl: "",
+      liveUrl: "",
     },
   ];
 
@@ -181,9 +189,43 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-lime-500 px-4 py-2 text-sm font-semibold text-black hover:bg-lime-400 transition"
+                  >
+                    Ver demo
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center justify-center rounded-full bg-gray-800 px-4 py-2 text-sm font-semibold text-gray-400">
+                    Demo en preparación
+                  </span>
+                )}
+                {project.githubUrl ? (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-200 hover:border-lime-400 hover:text-lime-300 transition"
+                  >
+                    GitHub
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center justify-center rounded-full border border-gray-700 px-4 py-2 text-sm font-semibold text-gray-500">
+                    GitHub pendiente
+                  </span>
+                )}
+              </div>
             </motion.article>
           ))}
         </div>
+        <p className="mt-8 text-center text-sm text-gray-400">
+          Comparte los enlaces reales de GitHub y Vercel para activar los botones
+          de demo y repositorio en cada proyecto.
+        </p>
       </section>
 
       {/* Blog & Social */}
