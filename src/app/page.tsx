@@ -14,12 +14,73 @@ export default function Home() {
   const whatsappMessage = "Hola, me gustaría obtener más información.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
+  const projectHighlights = [
+    {
+      title: "Clon Spotify",
+      description:
+        "Interfaz inmersiva con playlists, reproductor fijo y microinteracciones.",
+      tags: ["Clone UI", "Streaming", "Dark UI"],
+      githubUrl: "",
+      liveUrl: "",
+    },
+    {
+      title: "Clon Disney+",
+      description:
+        "Galerías cinematográficas, carruseles y navegación por categorías.",
+      tags: ["Clone UI", "Motion", "Catalogo"],
+      githubUrl: "",
+      liveUrl: "",
+    },
+    {
+      title: "Kebab house",
+      description:
+        "Landing con menú visual, pedidos rápidos y ubicación destacada.",
+      tags: ["Restaurantes", "Delivery", "Conversión"],
+      githubUrl: "",
+      liveUrl: "",
+    },
+    {
+      title: "Peluquería & barbería",
+      description:
+        "Reserva online, galería de cortes y CTA directo a WhatsApp.",
+      tags: ["Beauty", "Reservas", "Branding"],
+      githubUrl: "",
+      liveUrl: "",
+    },
+  ];
+
+  const blogEntries = [
+    {
+      title: "Cómo diseño experiencias web memorables",
+      excerpt:
+        "Un vistazo a mis procesos para combinar estética, velocidad y resultados.",
+      date: "Marzo 2024",
+    },
+    {
+      title: "Inspiración en apps conocidas",
+      excerpt:
+        "Qué podemos aprender de interfaces como Airbnb o Notion para proyectos locales.",
+      date: "Febrero 2024",
+    },
+    {
+      title: "Tips rápidos para tu landing",
+      excerpt:
+        "Tres cambios que mejoran la conversión sin tocar el presupuesto.",
+      date: "Enero 2024",
+    },
+    {
+      title: "Roadmap de proyectos Robbe360",
+      excerpt:
+        "Plan de trabajo para levantar los clones (Spotify/Disney+), Kebab y Barbería.",
+      date: "Diciembre 2023",
+    },
+  ];
 
   return (
     <div className="min-h-screen w-full font-sans">
 
       {/* Hero Section */}
-      <header className="h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-9 00 to-lime-500 text-white">
+      <header className="h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-lime-500 text-white">
         {isClient && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -104,6 +165,146 @@ export default function Home() {
               Páginas web, tiendas online y aplicaciones personalizadas para tu negocio.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Portfolio */}
+      <section className="py-16 px-6 bg-black text-white">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold">Proyectos Destacados</h2>
+          <p className="mt-4 text-lg text-gray-300">
+            Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca.
+          </p>
+        </div>
+        <div className="mt-8 max-w-6xl mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            "Crear repositorios en GitHub",
+            "Diseñar UI + assets",
+            "Desarrollar MVP funcional",
+            "Publicar en Vercel y conectar dominio",
+          ].map((step) => (
+            <div
+              key={step}
+              className="rounded-2xl border border-gray-700 bg-gray-900/60 px-4 py-3 text-sm text-gray-300"
+            >
+              {step}
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+          {projectHighlights.map((project) => (
+            <motion.article
+              key={project.title}
+              whileHover={{ y: -6 }}
+              className="bg-gray-900/80 border border-gray-700 rounded-2xl p-6 shadow-lg"
+            >
+              <h3 className="text-xl font-bold">{project.title}</h3>
+              <p className="mt-3 text-gray-300">{project.description}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-semibold px-3 py-1 rounded-full bg-lime-500/10 text-lime-300 border border-lime-500/40"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-lime-500 px-4 py-2 text-sm font-semibold text-black hover:bg-lime-400 transition"
+                  >
+                    Ver demo
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center justify-center rounded-full bg-gray-800 px-4 py-2 text-sm font-semibold text-gray-400">
+                    Demo en preparación
+                  </span>
+                )}
+                {project.githubUrl ? (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-200 hover:border-lime-400 hover:text-lime-300 transition"
+                  >
+                    GitHub
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center justify-center rounded-full border border-gray-700 px-4 py-2 text-sm font-semibold text-gray-500">
+                    GitHub pendiente
+                  </span>
+                )}
+              </div>
+            </motion.article>
+          ))}
+        </div>
+        <p className="mt-8 text-center text-sm text-gray-400">
+          Comparte los enlaces reales de GitHub y Vercel para activar los botones
+          de demo y repositorio en cada proyecto.
+        </p>
+      </section>
+
+      {/* Blog & Social */}
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
+          <div>
+            <h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2>
+            <p className="mt-4 text-lg text-gray-700">
+              Comparto ideas sobre diseño, marketing digital y desarrollo web.
+            </p>
+            <div className="mt-8 space-y-6">
+              {blogEntries.map((entry) => (
+                <article
+                  key={entry.title}
+                  className="rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition"
+                >
+                  <p className="text-sm text-gray-500">{entry.date}</p>
+                  <h3 className="text-xl font-semibold text-black mt-2">
+                    {entry.title}
+                  </h3>
+                  <p className="mt-2 text-gray-700">{entry.excerpt}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="bg-black text-white rounded-2xl p-6 shadow-lg">
+            <h3 className="text-2xl font-semibold">Conecta en redes</h3>
+            <p className="mt-3 text-gray-300">
+              Sígueme para ver más proyectos, tips y procesos creativos.
+            </p>
+            <div className="mt-6 flex flex-col gap-3">
+              <a
+                href="https://www.tiktok.com/@rxbbe8369"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-full bg-white text-black px-5 py-3 font-semibold hover:bg-lime-400 transition"
+              >
+                TikTok @RXBBE8369
+                <span className="text-sm">Ver videos</span>
+              </a>
+              <a
+                href="https://www.instagram.com/rxbbe8369/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-full bg-white text-black px-5 py-3 font-semibold hover:bg-lime-400 transition"
+              >
+                Instagram @RXBBE8369
+                <span className="text-sm">Galería</span>
+              </a>
+              <a
+                href="mailto:contacto@robbe.dev"
+                className="flex items-center justify-between rounded-full border border-lime-400 text-lime-300 px-5 py-3 font-semibold hover:bg-lime-400/10 transition"
+              >
+                Escribe por email
+                <span className="text-sm">contacto@robbe.dev</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
