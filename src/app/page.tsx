@@ -68,6 +68,12 @@ export default function Home() {
         "Tres cambios que mejoran la conversión sin tocar el presupuesto.",
       date: "Enero 2024",
     },
+    {
+      title: "Roadmap de proyectos Robbe360",
+      excerpt:
+        "Plan de trabajo para levantar los clones (Spotify/Disney+), Kebab y Barbería.",
+      date: "Diciembre 2023",
+    },
   ];
 
   return (
@@ -170,6 +176,21 @@ export default function Home() {
             Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca.
           </p>
         </div>
+        <div className="mt-8 max-w-6xl mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            "Crear repositorios en GitHub",
+            "Diseñar UI + assets",
+            "Desarrollar MVP funcional",
+            "Publicar en Vercel y conectar dominio",
+          ].map((step) => (
+            <div
+              key={step}
+              className="rounded-2xl border border-gray-700 bg-gray-900/60 px-4 py-3 text-sm text-gray-300"
+            >
+              {step}
+            </div>
+          ))}
+        </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
           {projectHighlights.map((project) => (
             <motion.article
@@ -258,21 +279,21 @@ export default function Home() {
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href="https://www.tiktok.com/"
+                href="https://www.tiktok.com/@rxbbe8369"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-between rounded-full bg-white text-black px-5 py-3 font-semibold hover:bg-lime-400 transition"
               >
-                TikTok
+                TikTok @RXBBE8369
                 <span className="text-sm">Ver videos</span>
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/rxbbe8369/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-between rounded-full bg-white text-black px-5 py-3 font-semibold hover:bg-lime-400 transition"
               >
-                Instagram
+                Instagram @RXBBE8369
                 <span className="text-sm">Galería</span>
               </a>
               <a
