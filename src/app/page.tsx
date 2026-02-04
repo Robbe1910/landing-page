@@ -301,7 +301,7 @@ export default function Home() {
                 className="flex items-center justify-between rounded-full border border-lime-400 text-lime-300 px-5 py-3 font-semibold hover:bg-lime-400/10 transition"
               >
                 Escribe por email
-                <span className="text-sm">contacto@robbe.dev</span>
+                <span className="text-sm">robertoberrendo@gmail.com</span>
               </a>
             </div>
           </div>
