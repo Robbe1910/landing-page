@@ -297,7 +297,7 @@ export default function Home() {
                 <span className="text-sm">Galería</span>
               </a>
               <a
-                href="mailto:contacto@robbe.dev"
+                href="mailto:robertoberrendo@gmail.com"
                 className="flex items-center justify-between rounded-full border border-lime-400 text-lime-300 px-5 py-3 font-semibold hover:bg-lime-400/10 transition"
               >
                 Escribe por email
