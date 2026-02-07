@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -14,6 +15,7 @@ export default function Home() {
   const whatsappMessage = "Hola, me gustaría obtener más información.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
+  // Textos de proyectos (personalizable para Roberto).
   const projectHighlights = [
     {
       title: "Clon Spotify",
@@ -49,7 +51,14 @@ export default function Home() {
     },
   ];
 
+  // Entradas de blog destacadas (personalizable para Roberto).
   const blogEntries = [
+    {
+      title: "Noticias destacadas · 1ª semana de febrero",
+      excerpt:
+        "Resumen de IA, apps y tendencias digitales con lo más relevante de la semana.",
+      date: "Febrero 2026",
+    },
     {
       title: "Cómo diseño experiencias web memorables",
       excerpt:
@@ -80,7 +89,27 @@ export default function Home() {
     <div className="min-h-screen w-full font-sans">
 
       {/* Hero Section */}
-      <header className="h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-lime-500 text-white">
+      <header className="relative h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-lime-500 text-white">
+        <nav className="absolute top-6 left-1/2 flex -translate-x-1/2 flex-wrap items-center justify-center gap-4 text-sm font-semibold uppercase tracking-wide">
+          <Link
+            href="/musica"
+            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
+          >
+            Música
+          </Link>
+          <Link
+            href="/blog"
+            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/proyectos"
+            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
+          >
+            Proyectos
+          </Link>
+        </nav>
         {isClient && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -140,7 +169,9 @@ export default function Home() {
       <section className="py-16 px-6 bg-black text-white text-center">
         <h2 className="text-3xl font-semibold">Sobre Mí</h2>
         <p className="mt-4 text-lg max-w-2xl mx-auto">
-          Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js. 
+          {/* Texto personalizable para Roberto */}
+          Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js.
+          Aquí iré compartiendo avances de mis rutas de música, blog y proyectos.
         </p>
         <a
           href="https://www.linkedin.com/in/roberto-berrendo-eguino-475b36171/"
@@ -168,15 +199,64 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Rutas principales */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold text-black">Rutas principales</h2>
+          <p className="mt-4 text-lg text-gray-600">
+            Explora mis espacios de música, publicaciones y proyectos activos con contenido en evolución.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
+          {[
+            {
+              title: "Música & Poesía",
+              description:
+                "Espacio para letras propias, ideas creativas, fechas de registro y próximos lanzamientos.",
+              href: "/musica",
+              cta: "Ir a música",
+            },
+            {
+              title: "Blog",
+              description:
+                "Noticias tech, tendencias y actualizaciones del mercado cada semana con entradas programadas.",
+              href: "/blog",
+              cta: "Ir al blog",
+            },
+            {
+              title: "Proyectos",
+              description:
+                "Avances de los clones y soluciones para negocios locales con repos y demos.",
+              href: "/proyectos",
+              cta: "Ver proyectos",
+            },
+          ].map((route) => (
+            <Link
+              key={route.title}
+              href={route.href}
+              className="group rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-xl font-semibold text-black">{route.title}</h3>
+              <p className="mt-3 text-gray-600">{route.description}</p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-lime-600">
+                {route.cta}
+                <span className="transition group-hover:translate-x-1">→</span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Portfolio */}
       <section className="py-16 px-6 bg-black text-white">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-semibold">Proyectos Destacados</h2>
           <p className="mt-4 text-lg text-gray-300">
-            Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca.
+            Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca y publicados con dominio propio.
           </p>
         </div>
         <div className="mt-8 max-w-6xl mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {/* Checklist de lo que se va a ejecutar en la web */}
           {[
             "Crear repositorios en GitHub",
             "Diseñar UI + assets",
@@ -244,8 +324,10 @@ export default function Home() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-gray-400">
+          {/* Texto personalizable para Roberto */}
           Comparte los enlaces reales de GitHub y Vercel para activar los botones
-          de demo y repositorio en cada proyecto.
+          de demo y repositorio en cada proyecto. Aquí también se mostrará el
+          progreso de cada lanzamiento.
         </p>
       </section>
 
@@ -255,7 +337,7 @@ export default function Home() {
           <div>
             <h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2>
             <p className="mt-4 text-lg text-gray-700">
-              Comparto ideas sobre diseño, marketing digital y desarrollo web.
+              Comparto ideas sobre diseño, marketing digital y desarrollo web con resúmenes semanales.
             </p>
             <div className="mt-8 space-y-6">
               {blogEntries.map((entry) => (
@@ -271,6 +353,12 @@ export default function Home() {
                 </article>
               ))}
             </div>
+            <Link
+              href="/blog"
+              className="mt-8 inline-flex items-center justify-center rounded-full border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 transition hover:border-lime-400 hover:text-lime-600"
+            >
+              Visitar el blog completo
+            </Link>
           </div>
           <div className="bg-black text-white rounded-2xl p-6 shadow-lg">
             <h3 className="text-2xl font-semibold">Conecta en redes</h3>
@@ -334,6 +422,22 @@ export default function Home() {
           WhatsApp
         </motion.a>
       </section>
+
+      <footer className="bg-gray-950 text-gray-300 py-10 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-gray-500">©</p>
+          <p className="text-lg font-semibold text-white">
+            {/* Texto personalizable para Roberto */}
+            2026 Roberto Berrendo Eguino. Todos los derechos reservados.
+          </p>
+          <Link
+            href="/privacidad"
+            className="text-sm font-semibold text-lime-300 hover:text-lime-200 transition"
+          >
+            Política de privacidad 2026 · Roberto Berrendo Eguino
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
