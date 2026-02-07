@@ -11,9 +11,17 @@ export default function PrivacidadPage() {
           Política de privacidad 2026
         </h1>
         <p className="mt-4 text-lg text-gray-600">
+<<<<<<< HEAD
           Responsable: Roberto Berrendo Eguino. Esta página sirve como referencia
           para el tratamiento de datos en la web y se irá completando con los
           detalles legales correspondientes.
+=======
+          {/* Texto personalizable para Roberto */}
+          Responsable: Roberto Berrendo Eguino. Esta página sirve como referencia
+          para el tratamiento de datos en la web y se irá completando con los
+          detalles legales correspondientes, además de explicar formularios,
+          boletines y contacto.
+>>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
         </p>
         <div className="mt-8 space-y-4 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-gray-700">
           <p>

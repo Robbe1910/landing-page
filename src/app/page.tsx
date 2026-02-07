@@ -15,6 +15,7 @@ export default function Home() {
   const whatsappMessage = "Hola, me gustaría obtener más información.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
+  // Textos de proyectos (personalizable para Roberto).
   const projectHighlights = [
     {
       title: "Clon Spotify",
@@ -50,7 +51,14 @@ export default function Home() {
     },
   ];
 
+  // Entradas de blog destacadas (personalizable para Roberto).
   const blogEntries = [
+    {
+      title: "Noticias destacadas · 1ª semana de febrero",
+      excerpt:
+        "Resumen de IA, apps y tendencias digitales con lo más relevante de la semana.",
+      date: "Febrero 2026",
+    },
     {
       title: "Cómo diseño experiencias web memorables",
       excerpt:
@@ -161,7 +169,9 @@ export default function Home() {
       <section className="py-16 px-6 bg-black text-white text-center">
         <h2 className="text-3xl font-semibold">Sobre Mí</h2>
         <p className="mt-4 text-lg max-w-2xl mx-auto">
-          Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js. 
+          {/* Texto personalizable para Roberto */}
+          Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js.
+          Aquí iré compartiendo avances de mis rutas de música, blog y proyectos.
         </p>
         <a
           href="https://www.linkedin.com/in/roberto-berrendo-eguino-475b36171/"
@@ -194,7 +204,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-semibold text-black">Rutas principales</h2>
           <p className="mt-4 text-lg text-gray-600">
+<<<<<<< HEAD
             Explora mis espacios de música, publicaciones y proyectos activos.
+=======
+            Explora mis espacios de música, publicaciones y proyectos activos con contenido en evolución.
+>>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
           </p>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
@@ -202,21 +216,33 @@ export default function Home() {
             {
               title: "Música & Poesía",
               description:
+<<<<<<< HEAD
                 "Espacio para letras propias, ideas creativas y próximos lanzamientos.",
+=======
+                "Espacio para letras propias, ideas creativas, fechas de registro y próximos lanzamientos.",
+>>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
               href: "/musica",
               cta: "Ir a música",
             },
             {
               title: "Blog",
               description:
+<<<<<<< HEAD
                 "Noticias tech, tendencias y actualizaciones del mercado cada semana.",
+=======
+                "Noticias tech, tendencias y actualizaciones del mercado cada semana con entradas programadas.",
+>>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
               href: "/blog",
               cta: "Ir al blog",
             },
             {
               title: "Proyectos",
               description:
+<<<<<<< HEAD
                 "Avances de los clones y soluciones para negocios locales.",
+=======
+                "Avances de los clones y soluciones para negocios locales con repos y demos.",
+>>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
               href: "/proyectos",
               cta: "Ver proyectos",
             },
@@ -242,10 +268,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-semibold">Proyectos Destacados</h2>
           <p className="mt-4 text-lg text-gray-300">
-            Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca.
+            Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca y publicados con dominio propio.
           </p>
         </div>
         <div className="mt-8 max-w-6xl mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {/* Checklist de lo que se va a ejecutar en la web */}
           {[
             "Crear repositorios en GitHub",
             "Diseñar UI + assets",
@@ -313,8 +340,10 @@ export default function Home() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-gray-400">
+          {/* Texto personalizable para Roberto */}
           Comparte los enlaces reales de GitHub y Vercel para activar los botones
-          de demo y repositorio en cada proyecto.
+          de demo y repositorio en cada proyecto. Aquí también se mostrará el
+          progreso de cada lanzamiento.
         </p>
       </section>
 
@@ -324,7 +353,7 @@ export default function Home() {
           <div>
             <h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2>
             <p className="mt-4 text-lg text-gray-700">
-              Comparto ideas sobre diseño, marketing digital y desarrollo web.
+              Comparto ideas sobre diseño, marketing digital y desarrollo web con resúmenes semanales.
             </p>
             <div className="mt-8 space-y-6">
               {blogEntries.map((entry) => (
@@ -414,6 +443,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-gray-500">©</p>
           <p className="text-lg font-semibold text-white">
+<<<<<<< HEAD
+=======
+            {/* Texto personalizable para Roberto */}
+>>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
             2026 Roberto Berrendo Eguino. Todos los derechos reservados.
           </p>
           <Link
