@@ -1,9 +1,6 @@
 import Link from "next/link";
 
-<<<<<<< HEAD
-=======
 // Roadmap de proyectos (personalizable para Roberto).
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
 const projectRoadmap = [
   {
     title: "Clon Spotify",
@@ -30,12 +27,8 @@ export default function ProyectosPage() {
         <p className="text-sm uppercase tracking-[0.3em] text-lime-400">Proyectos</p>
         <h1 className="mt-4 text-4xl font-bold">Roadmap activo</h1>
         <p className="mt-4 text-lg text-gray-300">
-<<<<<<< HEAD
-          Aquí se mostrarán los repositorios y demos cuando estén listos.
-=======
           {/* Texto personalizable para Roberto */}
           Aquí se mostrarán los repositorios, demos y fechas de publicación cuando estén listos.
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {projectRoadmap.map((project) => (

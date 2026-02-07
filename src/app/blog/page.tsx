@@ -1,9 +1,5 @@
 import Link from "next/link";
 
-<<<<<<< HEAD
-const blogEntries = [
-  {
-=======
 // Entradas de blog (personalizable para Roberto).
 const blogEntries = [
   {
@@ -13,7 +9,6 @@ const blogEntries = [
     date: "Febrero 2026",
   },
   {
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
     title: "Actualidad tech: mañana",
     excerpt:
       "Resumen de novedades y mercado para empezar el día con foco.",
@@ -40,13 +35,9 @@ export default function BlogPage() {
         <p className="text-sm uppercase tracking-[0.3em] text-lime-600">Blog</p>
         <h1 className="mt-4 text-4xl font-bold text-black">Noticias y recursos</h1>
         <p className="mt-4 text-lg text-gray-600">
-<<<<<<< HEAD
-          Publicaciones automáticas sobre tecnología, mercado y tendencias.
-=======
           {/* Texto personalizable para Roberto */}
           Publicaciones automáticas sobre tecnología, mercado y tendencias con
           entradas programadas para mañana, tarde y noche.
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {blogEntries.map((entry) => (

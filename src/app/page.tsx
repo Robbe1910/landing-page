@@ -204,11 +204,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-semibold text-black">Rutas principales</h2>
           <p className="mt-4 text-lg text-gray-600">
-<<<<<<< HEAD
-            Explora mis espacios de música, publicaciones y proyectos activos.
-=======
             Explora mis espacios de música, publicaciones y proyectos activos con contenido en evolución.
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
           </p>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
@@ -216,33 +212,21 @@ export default function Home() {
             {
               title: "Música & Poesía",
               description:
-<<<<<<< HEAD
-                "Espacio para letras propias, ideas creativas y próximos lanzamientos.",
-=======
                 "Espacio para letras propias, ideas creativas, fechas de registro y próximos lanzamientos.",
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
               href: "/musica",
               cta: "Ir a música",
             },
             {
               title: "Blog",
               description:
-<<<<<<< HEAD
-                "Noticias tech, tendencias y actualizaciones del mercado cada semana.",
-=======
                 "Noticias tech, tendencias y actualizaciones del mercado cada semana con entradas programadas.",
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
               href: "/blog",
               cta: "Ir al blog",
             },
             {
               title: "Proyectos",
               description:
-<<<<<<< HEAD
-                "Avances de los clones y soluciones para negocios locales.",
-=======
                 "Avances de los clones y soluciones para negocios locales con repos y demos.",
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
               href: "/proyectos",
               cta: "Ver proyectos",
             },
@@ -443,10 +427,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-gray-500">©</p>
           <p className="text-lg font-semibold text-white">
-<<<<<<< HEAD
-=======
             {/* Texto personalizable para Roberto */}
->>>>>>> codex/add-footer-with-copyright-and-routes-o1vkp1
             2026 Roberto Berrendo Eguino. Todos los derechos reservados.
           </p>
           <Link
