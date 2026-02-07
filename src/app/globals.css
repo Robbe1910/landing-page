@@ -29,3 +29,24 @@ body {
 .btn-lime:hover {
   background-color: #80ffb0; /* un tono más claro para hover */
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    animation: none;
+  }
+}
