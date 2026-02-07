@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -80,7 +81,27 @@ export default function Home() {
     <div className="min-h-screen w-full font-sans">
 
       {/* Hero Section */}
-      <header className="h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-lime-500 text-white">
+      <header className="relative h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-lime-500 text-white">
+        <nav className="absolute top-6 left-1/2 flex -translate-x-1/2 flex-wrap items-center justify-center gap-4 text-sm font-semibold uppercase tracking-wide">
+          <Link
+            href="/musica"
+            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
+          >
+            Música
+          </Link>
+          <Link
+            href="/blog"
+            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/proyectos"
+            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
+          >
+            Proyectos
+          </Link>
+        </nav>
         {isClient && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -165,6 +186,54 @@ export default function Home() {
               Páginas web, tiendas online y aplicaciones personalizadas para tu negocio.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Rutas principales */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold text-black">Rutas principales</h2>
+          <p className="mt-4 text-lg text-gray-600">
+            Explora mis espacios de música, publicaciones y proyectos activos.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
+          {[
+            {
+              title: "Música & Poesía",
+              description:
+                "Espacio para letras propias, ideas creativas y próximos lanzamientos.",
+              href: "/musica",
+              cta: "Ir a música",
+            },
+            {
+              title: "Blog",
+              description:
+                "Noticias tech, tendencias y actualizaciones del mercado cada semana.",
+              href: "/blog",
+              cta: "Ir al blog",
+            },
+            {
+              title: "Proyectos",
+              description:
+                "Avances de los clones y soluciones para negocios locales.",
+              href: "/proyectos",
+              cta: "Ver proyectos",
+            },
+          ].map((route) => (
+            <Link
+              key={route.title}
+              href={route.href}
+              className="group rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-xl font-semibold text-black">{route.title}</h3>
+              <p className="mt-3 text-gray-600">{route.description}</p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-lime-600">
+                {route.cta}
+                <span className="transition group-hover:translate-x-1">→</span>
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -271,6 +340,12 @@ export default function Home() {
                 </article>
               ))}
             </div>
+            <Link
+              href="/blog"
+              className="mt-8 inline-flex items-center justify-center rounded-full border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 transition hover:border-lime-400 hover:text-lime-600"
+            >
+              Visitar el blog completo
+            </Link>
           </div>
           <div className="bg-black text-white rounded-2xl p-6 shadow-lg">
             <h3 className="text-2xl font-semibold">Conecta en redes</h3>
@@ -334,6 +409,21 @@ export default function Home() {
           WhatsApp
         </motion.a>
       </section>
+
+      <footer className="bg-gray-950 text-gray-300 py-10 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-gray-500">©</p>
+          <p className="text-lg font-semibold text-white">
+            2026 Roberto Berrendo Eguino. Todos los derechos reservados.
+          </p>
+          <Link
+            href="/privacidad"
+            className="text-sm font-semibold text-lime-300 hover:text-lime-200 transition"
+          >
+            Política de privacidad 2026 · Roberto Berrendo Eguino
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
