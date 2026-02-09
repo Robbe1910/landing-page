@@ -1,6 +1,7 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { blogEntries } from "../../data/blogEntries";
+import { socialPosts } from "../../data/socialPosts";
 
 export default function BlogPage() {
   return (
@@ -45,6 +46,53 @@ export default function BlogPage() {
             </Link>
           ))}
         </div>
+
+        <section className="mt-14 rounded-2xl border border-black/10 bg-black px-6 py-8 text-white">
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-sm uppercase tracking-[0.25em] text-lime-300">NUEVO</p>
+              <h2 className="mt-2 text-2xl font-semibold">Posts en RRSS</h2>
+              <p className="mt-2 text-gray-300">
+                También publico contenido corto en redes: tips, avances de proyectos y procesos reales.
+              </p>
+            </div>
+            <a
+              href="https://www.instagram.com/rxbbe8369/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-lime-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-lime-400"
+            >
+              Ver perfil principal
+            </a>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {socialPosts.map((post) => (
+              <article
+                key={post.id}
+                className="rounded-xl border border-white/20 bg-white/5 p-5 transition hover:bg-white/10"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="rounded-full border border-lime-400/50 px-3 py-1 text-xs font-semibold text-lime-300">
+                    {post.platform}
+                  </span>
+                  <span className="text-xs text-gray-400">{post.date}</span>
+                </div>
+                <h3 className="mt-3 text-lg font-semibold">{post.title}</h3>
+                <p className="mt-2 text-sm text-gray-300">{post.excerpt}</p>
+                <a
+                  href={post.postUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center text-sm font-semibold text-lime-300 transition hover:text-lime-200"
+                >
+                  Ir al post
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <div className="mt-10 flex flex-wrap gap-4">
           <Link
             href="/"
