@@ -1,14 +1,42 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
+  const testimonialsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    const container = testimonialsRef.current;
+    if (!container || !window.matchMedia("(max-width: 767px)").matches) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      const firstCard = container.querySelector("article");
+      const cardWidth =
+        firstCard instanceof HTMLElement
+          ? firstCard.offsetWidth
+          : container.clientWidth * 0.85;
+      const step = cardWidth + 24;
+      const nextPosition = container.scrollLeft + step;
+      const maxScrollLeft = container.scrollWidth - container.clientWidth - 4;
+
+      if (nextPosition >= maxScrollLeft) {
+        container.scrollTo({ left: 0, behavior: "smooth" });
+        return;
+      }
+
+      container.scrollTo({ left: nextPosition, behavior: "smooth" });
+    }, 4000);
+
+    return () => window.clearInterval(intervalId);
   }, []);
 
   const whatsappNumber = "609881656";
@@ -82,6 +110,53 @@ export default function Home() {
       excerpt:
         "Plan de trabajo para levantar los clones (Spotify/Disney+), Kebab y Barbería.",
       date: "Diciembre 2023",
+    },
+  ];
+
+  const faqItems = [
+    {
+      question: "Cuanto tarda en estar lista una landing?",
+      answer:
+        "Una version inicial funcional suele estar entre 5 y 10 dias, segun alcance y contenidos.",
+    },
+    {
+      question: "Puedo pedir cambios despues de la entrega?",
+      answer:
+        "Si. Incluyo una fase de ajustes para pulir textos, bloques visuales y conversion.",
+    },
+    {
+      question: "Trabajas solo en diseno o tambien en desarrollo?",
+      answer:
+        "Trabajo el proceso completo: estrategia, diseno, desarrollo y publicacion final.",
+    },
+    {
+      question: "La web queda optimizada para SEO?",
+      answer:
+        "Si. Se configura SEO tecnico base: metadata, sitemap, robots y estructura limpia para indexacion.",
+    },
+  ];
+
+  const testimonials = [
+    {
+      client: "Kebab House (local)",
+      problem: "Tenian visitas desde Instagram pero pocos pedidos cerrados.",
+      solution:
+        "Rediseñe la landing con menu visible, CTA de WhatsApp arriba y acceso rapido a ubicacion.",
+      result: "+42% en mensajes directos durante el primer mes.",
+    },
+    {
+      client: "Barberia de barrio",
+      problem: "La mayoria de clientes preguntaba horario por chat sin reservar.",
+      solution:
+        "Estructure servicios claros, bloque de reservas y recordatorios para evitar perdida de citas.",
+      result: "Mas reservas semanales y menos cancelaciones de ultima hora.",
+    },
+    {
+      client: "Marca personal freelance",
+      problem: "No transmitia valor y dependia solo de referencias.",
+      solution:
+        "Construimos una web con propuesta clara, portfolio y CTA de consulta en puntos clave.",
+      result: "Nuevos leads cualificados de forma constante.",
     },
   ];
 
@@ -392,6 +467,65 @@ export default function Home() {
                 <span className="text-sm">robertoberrendo@gmail.com</span>
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonios */}
+      <section className="py-16 px-6 bg-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-3xl font-semibold text-black">Testimonios y resultados</h2>
+            <p className="mt-4 text-gray-600">
+              Casos tipo de clientes con foco en conversion y crecimiento real.
+            </p>
+          </div>
+          <p className="mt-6 text-center text-sm text-gray-500 md:hidden">
+            Desliza para ver mas testimonios
+          </p>
+          <div
+            ref={testimonialsRef}
+            className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible"
+          >
+            {testimonials.map((testimonial) => (
+              <article
+                key={testimonial.client}
+                className="min-w-[85%] snap-start rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:min-w-[60%] md:min-w-0"
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-lime-600">
+                  {testimonial.client}
+                </p>
+                <h3 className="mt-4 text-lg font-semibold text-black">Problema</h3>
+                <p className="mt-2 text-gray-700">{testimonial.problem}</p>
+                <h3 className="mt-4 text-lg font-semibold text-black">Solucion</h3>
+                <p className="mt-2 text-gray-700">{testimonial.solution}</p>
+                <h3 className="mt-4 text-lg font-semibold text-black">Resultado</h3>
+                <p className="mt-2 font-semibold text-lime-700">{testimonial.result}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contacto */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-3xl font-semibold text-black">Preguntas frecuentes</h2>
+            <p className="mt-4 text-gray-600">
+              Respuestas rapidas para que tengas claro como trabajamos y que esperar.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4">
+            {faqItems.map((item) => (
+              <article
+                key={item.question}
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+              >
+                <h3 className="text-lg font-semibold text-black">{item.question}</h3>
+                <p className="mt-3 text-gray-700">{item.answer}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
