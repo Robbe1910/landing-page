@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { blogEntries, getBlogEntryBySlug } from "../../../data/blogEntries";
 
@@ -9,6 +10,46 @@ type BlogDetailPageProps = {
 
 export function generateStaticParams() {
   return blogEntries.map((entry) => ({ slug: entry.slug }));
+}
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://robbe360.com";
+
+export async function generateMetadata({
+  params,
+}: BlogDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const entry = getBlogEntryBySlug(slug);
+
+  if (!entry) {
+    return {
+      title: "Post no encontrado",
+      description: "La publicacion solicitada no esta disponible.",
+    };
+  }
+
+  const description = entry.excerpt;
+  const url = `${siteUrl}/blog/${entry.slug}`;
+
+  return {
+    title: entry.title,
+    description,
+    alternates: {
+      canonical: `/blog/${entry.slug}`,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      title: entry.title,
+      description,
+      images: [{ url: entry.imageUrl, alt: entry.imageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [entry.imageUrl],
+    },
+  };
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
@@ -26,9 +67,22 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         <h1 className="fade-in-up mt-4 text-3xl font-bold text-black sm:text-4xl">
           {entry.title}
         </h1>
-        <p className="fade-in-up mt-3 text-sm uppercase tracking-[0.2em] text-gray-500">
-          {entry.date}
-        </p>
+        <div className="fade-in-up mt-3 flex flex-wrap items-center gap-2">
+          <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
+            {entry.date}
+          </p>
+          <span className="rounded-full border border-lime-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-lime-700">
+            {entry.type === "real" ? "Post real" : "Post automatizado"}
+          </span>
+          <span className="rounded-full border border-gray-300 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-600">
+            {entry.viewsLabel}
+          </span>
+          {entry.scheduleLabel ? (
+            <span className="rounded-full bg-black px-3 py-1 text-xs font-semibold uppercase tracking-wide text-lime-300">
+              {entry.scheduleLabel}
+            </span>
+          ) : null}
+        </div>
 
         <div className="fade-in-up relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl">
           <Image
