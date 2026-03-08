@@ -4,6 +4,51 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+type AdSlotProps = {
+  slot?: string;
+  format?: string;
+  layoutKey?: string;
+  className?: string;
+  style?: React.CSSProperties;
+};
+
+const AdSlot: React.FC<AdSlotProps> = ({
+  slot,
+  format = "auto",
+  layoutKey,
+  className = "",
+  style,
+}) => {
+  const adRef = useRef<HTMLModElement>(null);
+
+  useEffect(() => {
+    if (!slot || !adRef.current) return;
+
+    try {
+      const w = window as typeof window & { adsbygoogle?: unknown[] };
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
+    } catch (error) {
+      console.error("Adsense error", error);
+    }
+  }, [slot]);
+
+  if (!slot) return null;
+
+  return (
+    <ins
+      className={`adsbygoogle block ${className}`}
+      style={{ display: "block", ...(style || {}) }}
+      data-ad-client="ca-pub-7977064296204880"
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+      {...(layoutKey ? { "data-ad-layout-key": layoutKey } : {})}
+      ref={adRef}
+    />
+  );
+};
+
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
   const testimonialsRef = useRef<HTMLDivElement | null>(null);
@@ -38,6 +83,12 @@ export default function Home() {
 
     return () => window.clearInterval(intervalId);
   }, []);
+
+  const adSlots = {
+    hero: process.env.NEXT_PUBLIC_ADSENSE_SLOT_HERO,
+    sidebar: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR,
+    inline: process.env.NEXT_PUBLIC_ADSENSE_SLOT_INLINE,
+  };
 
   const whatsappNumber = "609881656";
   const whatsappMessage = "Hola, me gustaría obtener más información.";
@@ -110,6 +161,24 @@ export default function Home() {
       excerpt:
         "Plan de trabajo para levantar los clones (Spotify/Disney+), Kebab y Barbería.",
       date: "Diciembre 2023",
+    },
+  ];
+
+  const updates = [
+    {
+      title: "Adsense listo para revisión",
+      detail: "El script de Google Ads se cargó en el layout para validar el dominio robbe360.com.",
+      date: "Marzo 2026",
+    },
+    {
+      title: "Agenda en Google Calendar",
+      detail: "CTA de agenda directa para reservar sesiones de diagnóstico.",
+      date: "Marzo 2026",
+    },
+    {
+      title: "Rutas activas",
+      detail: "Música, blog y proyectos se siguen actualizando con nuevos lanzamientos.",
+      date: "Febrero 2026",
     },
   ];
 
@@ -240,6 +309,19 @@ export default function Home() {
         )}
       </header>
 
+      {/* AdSense: hero debajo del pliegue */}
+      {adSlots.hero && (
+        <div className="bg-gray-950 px-6 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <AdSlot
+              slot={adSlots.hero}
+              className="rounded-xl overflow-hidden"
+              style={{ minHeight: 90 }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Sobre mí */}
       <section className="py-16 px-6 bg-black text-white text-center">
         <h2 className="text-3xl font-semibold">Sobre Mí</h2>
@@ -271,6 +353,33 @@ export default function Home() {
               Páginas web, tiendas online y aplicaciones personalizadas para tu negocio.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Actualizaciones */}
+      <section className="py-14 px-6 bg-gray-900 text-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-lime-400">Actualizaciones</p>
+              <h2 className="text-3xl font-semibold">Lo último que estoy moviendo</h2>
+            </div>
+            <p className="text-gray-300 max-w-xl">
+              Minirresúmenes rápidos para saber en qué estoy trabajando esta semana.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {updates.map((update) => (
+              <article
+                key={update.title}
+                className="rounded-2xl border border-gray-800 bg-gray-950/70 p-5 shadow-sm"
+              >
+                <p className="text-xs uppercase tracking-[0.15em] text-lime-400">{update.date}</p>
+                <h3 className="mt-2 text-lg font-semibold">{update.title}</h3>
+                <p className="mt-2 text-gray-300">{update.detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -467,6 +576,15 @@ export default function Home() {
                 <span className="text-sm">robertoberrendo@gmail.com</span>
               </a>
             </div>
+            {adSlots.sidebar && (
+              <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-3">
+                <AdSlot
+                  slot={adSlots.sidebar}
+                  className="overflow-hidden rounded-lg"
+                  style={{ minHeight: 250 }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -529,6 +647,19 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* AdSense: bloque medio */}
+      {adSlots.inline && (
+        <div className="bg-gray-50 px-6 pb-12">
+          <div className="max-w-5xl mx-auto">
+            <AdSlot
+              slot={adSlots.inline}
+              className="rounded-xl overflow-hidden"
+              style={{ minHeight: 90 }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Contacto */}
       <section className="py-16 px-6 bg-black text-white text-center">

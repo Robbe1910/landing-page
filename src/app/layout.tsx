@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -60,6 +61,9 @@ export const metadata: Metadata = {
     images: [ogImage],
     creator: "@rxbbe8369",
   },
+  other: {
+    "google-adsense-account": "ca-pub-7977064296204880",
+  },
   robots: {
     index: true,
     follow: true,
@@ -97,6 +101,14 @@ export default function RootLayout({
 
   return (
     <html lang="es">
+      <head>
+        <Script
+          id="adsense-script"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7977064296204880"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
