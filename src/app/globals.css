@@ -6,15 +6,23 @@
 
 /* Modo base */
 :root {
-  --background: #111111;   /* Gris casi negro */
-  --foreground: #ffffff;   /* Texto blanco */
+  --background: #06122b;
+  --foreground: #f5f7ff;
+  --surface: #091a38;
+  --surface-soft: rgba(7, 23, 52, 0.72);
+  --brand-blue: #215dff;
+  --brand-cyan: #20c8ff;
+  --brand-green: #84f32b;
   --brand-lime: #32ff7e;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(30, 102, 255, 0.16), transparent 26%),
+    radial-gradient(circle at 82% 78%, rgba(132, 243, 43, 0.2), transparent 28%),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
 /* Ejemplo de clases personalizadas */
@@ -30,6 +38,18 @@ body {
   background-color: #80ffb0; /* un tono más claro para hover */
 }
 
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -41,12 +61,66 @@ body {
   }
 }
 
+@keyframes ambientPulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes softGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 18px rgba(32, 200, 255, 0.2), 0 0 24px rgba(132, 243, 43, 0.16);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(32, 200, 255, 0.34), 0 0 36px rgba(132, 243, 43, 0.24);
+  }
+}
+
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out both;
 }
 
+.lofi-bars {
+  display: inline-flex;
+  align-items: end;
+  gap: 0.22rem;
+  height: 0.95rem;
+}
+
+.lofi-bars span {
+  width: 0.18rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--brand-cyan), var(--brand-green));
+  animation: ambientPulse 1s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.lofi-bars span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.lofi-bars span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.lofi-glow {
+  animation: softGlow 2.8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fade-in-up {
+    animation: none;
+  }
+
+  .lofi-bars span,
+  .lofi-glow {
     animation: none;
   }
 }
