@@ -1,0 +1,101 @@
+[
+  {
+    "id": "2026-03-09-xai-video-lab",
+    "title": "Grok Video Lab listo: prompts validados y UI estable",
+    "summary": "La sección de video con Grok se estabilizó con prompts cortos y validación de imágenes opcionales antes de enviar a la API.",
+    "date": "2026-03-09",
+    "displayDate": "9 mar 2026",
+    "category": "Producto",
+    "interest": "Alta conversación",
+    "sourceName": "Bitácora Robbe360",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2026-03-08-adsense-verification",
+    "title": "Adsense: dominio robbe360.com en revisión completa",
+    "summary": "El script oficial quedó cargado en layout y se envió la verificación de dominio sin bloqueadores en producción.",
+    "date": "2026-03-08",
+    "displayDate": "8 mar 2026",
+    "category": "Monetización",
+    "interest": "Muy vista",
+    "sourceName": "Adsense status",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2026-03-07-local-offers-pack",
+    "title": "Pack express de landing 48h para negocios locales",
+    "summary": "Nuevo paquete con wireframe predefinido, textos base y conexión a WhatsApp que se entrega en dos días.",
+    "date": "2026-03-07",
+    "displayDate": "7 mar 2026",
+    "category": "Servicios",
+    "interest": "Tendencia positiva",
+    "sourceName": "Notas de producto",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2026-03-04-analytics-cleanup",
+    "title": "Limpieza de analíticas: eventos de scroll y CTA unificados",
+    "summary": "Se simplificaron los eventos para medir solo scroll crítico, clic en CTA y envíos de video/audio.",
+    "date": "2026-03-04",
+    "displayDate": "4 mar 2026",
+    "category": "Datos",
+    "interest": "Alta conversación",
+    "sourceName": "Changelog interno",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2026-02-26-ai-kit-demo",
+    "title": "Demo de AI Kit: generación de audio y vídeo en vivo",
+    "summary": "Se mostró el flujo TTS + video en una demo corta con latencia medible para clientes curiosos.",
+    "date": "2026-02-26",
+    "displayDate": "26 feb 2026",
+    "category": "Demo",
+    "interest": "Tendencia positiva",
+    "sourceName": "Presentación interna",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2026-02-15-local-seo-schema",
+    "title": "Esquemas locales reforzados (FAQ + HowTo)",
+    "summary": "Se añadieron bloques de FAQ y HowTo en rutas clave para mejorar fragmentos enriquecidos.",
+    "date": "2026-02-15",
+    "displayDate": "15 feb 2026",
+    "category": "SEO",
+    "interest": "Muy vista",
+    "sourceName": "SEO log",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2026-01-28-whatsapp-playbooks",
+    "title": "Playbooks de WhatsApp listos para ventas rápidas",
+    "summary": "Se documentaron respuestas y rutas cortas para cerrar leads que llegan desde landing en menos de 5 minutos.",
+    "date": "2026-01-28",
+    "displayDate": "28 ene 2026",
+    "category": "Ops",
+    "interest": "Alta conversación",
+    "sourceName": "Notas operativas",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2025-12-12-core-web-vitals",
+    "title": "Core Web Vitals estables en móviles",
+    "summary": "LCP y CLS se mantuvieron verdes tras optimizar imágenes y lazy loading de laboratorios.",
+    "date": "2025-12-12",
+    "displayDate": "12 dic 2025",
+    "category": "Performance",
+    "interest": "Tendencia positiva",
+    "sourceName": "Auditoría interna",
+    "sourceUrl": "https://robbe360.com"
+  },
+  {
+    "id": "2025-10-05-holiday-campaigns",
+    "title": "Plantillas navideñas guardadas para campañas 2026",
+    "summary": "Se archivaron variantes de héroes y banners para relanzar en Q4 sin rehacer creatividades.",
+    "date": "2025-10-05",
+    "displayDate": "5 oct 2025",
+    "category": "Creatividad",
+    "interest": "Muy vista",
+    "sourceName": "Repositorio creativo",
+    "sourceUrl": "https://robbe360.com"
+  }
+]

@@ -4,11 +4,8 @@ import {
   getAutomatedBlogEntries,
   getRealBlogEntries,
 } from "../../data/blogEntries";
-import {
-  newsHighlights,
-  searchTrendHighlights2025,
-} from "../../data/newsHighlights";
 import { socialPosts } from "../../data/socialPosts";
+import { NewsBoard } from "../../components/news-board";
 
 export default function BlogPage() {
   const realBlogEntries = getRealBlogEntries();
@@ -83,7 +80,7 @@ export default function BlogPage() {
               </h2>
             </div>
             <span className="rounded-full bg-black px-3 py-1 text-xs font-semibold uppercase tracking-wide text-lime-300">
-              Manana / Tarde / Noche
+              Mañana / Tarde / Noche
             </span>
           </div>
           <p className="mt-3 text-gray-600">
@@ -131,73 +128,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <section className="mt-14 rounded-2xl border border-gray-200 bg-gradient-to-br from-lime-50 via-white to-gray-50 px-6 py-8">
-          <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-lime-700">
-              NUEVO
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-black">
-              Noticias interesantes y esperanzadoras (Enero + 2025)
-            </h2>
-            <p className="mt-2 text-gray-700">
-              Seleccion de noticias reales con buena recepcion para inspirar
-              contenidos de alto alcance.
-            </p>
-          </div>
-
-          <div className="mt-7 grid gap-4 md:grid-cols-2">
-            {newsHighlights.map((news) => (
-              <article
-                key={news.id}
-                className="rounded-xl border border-black/10 bg-white p-5 shadow-sm transition hover:shadow-md"
-              >
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-lime-300 px-3 py-1 text-xs font-semibold text-lime-700">
-                    {news.periodLabel}
-                  </span>
-                  <span className="rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-600">
-                    {news.interestLabel}
-                  </span>
-                </div>
-                <p className="mt-3 text-xs uppercase tracking-[0.15em] text-gray-400">
-                  {news.date}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-black">
-                  {news.title}
-                </h3>
-                <p className="mt-2 text-sm text-gray-700">{news.summary}</p>
-                <a
-                  href={news.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center text-sm font-semibold text-lime-700 transition hover:text-lime-800"
-                >
-                  Fuente: {news.sourceName}
-                </a>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-7 rounded-xl border border-black/10 bg-black p-5 text-white">
-            <h3 className="text-lg font-semibold">Temas mas buscados de 2025</h3>
-            <p className="mt-2 text-sm text-gray-300">
-              Usa esta guia para decidir titulares del blog normal cada semana:
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-200">
-              {searchTrendHighlights2025.map((item) => (
-                <li key={item}>- {item}</li>
-              ))}
-            </ul>
-            <a
-              href="https://trends.withgoogle.com/year-in-search/2025/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center text-sm font-semibold text-lime-300 transition hover:text-lime-200"
-            >
-              Ver Year in Search 2025
-            </a>
-          </div>
-        </section>
+        <NewsBoard />
 
         <section className="mt-14 rounded-2xl border border-black/10 bg-black px-6 py-8 text-white">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">

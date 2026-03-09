@@ -77,6 +77,19 @@ export default function Home() {
       </section>
 
       <section className="bg-black px-6 py-16 text-center text-white"><h2 className="text-3xl font-semibold">Contacto</h2><p className="mt-4">Contáctame sin compromiso.</p><a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block rounded-full bg-lime-500 px-6 py-3 font-bold text-black transition duration-300 hover:bg-lime-400">WhatsApp</a></section>
+
+      <footer className="bg-gray-950 px-6 py-10 text-center text-gray-300">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3">
+          <p className="text-sm uppercase tracking-[0.24em] text-gray-500">©</p>
+          <p className="text-lg font-semibold text-white">2026 Roberto Berrendo Eguino. Todos los derechos reservados.</p>
+          <a
+            href="/privacidad"
+            className="text-sm font-semibold text-lime-300 transition hover:text-lime-200"
+          >
+            Política de privacidad
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
