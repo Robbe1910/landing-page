@@ -5,32 +5,28 @@ export const GOOGLE_CALENDAR_LINK = "https://calendar.app.google/r3uhjT7JKmDBcBx
 export const PROJECT_HIGHLIGHTS = [
   {
     title: "Clon Spotify",
-    description:
-      "Interfaz inmersiva con playlists, reproductor fijo y microinteracciones.",
+    description: "Interfaz inmersiva con playlists, reproductor fijo y microinteracciones.",
     tags: ["Clone UI", "Streaming", "Dark UI"],
     githubUrl: "",
     liveUrl: "",
   },
   {
     title: "Clon Disney+",
-    description:
-      "Galerías cinematográficas, carruseles y navegación por categorías.",
+    description: "Galerías cinematográficas, carruseles y navegación por categorías.",
     tags: ["Clone UI", "Motion", "Catálogo"],
     githubUrl: "",
     liveUrl: "",
   },
   {
     title: "Kebab House",
-    description:
-      "Landing con menú visual, pedidos rápidos y ubicación destacada.",
+    description: "Landing con menú visual, pedidos rápidos y ubicación destacada.",
     tags: ["Restaurantes", "Delivery", "Conversión"],
     githubUrl: "",
     liveUrl: "",
   },
   {
     title: "Peluquería & barbería",
-    description:
-      "Reserva online, galería de cortes y CTA directo a WhatsApp.",
+    description: "Reserva online, galería de cortes y CTA directo a WhatsApp.",
     tags: ["Beauty", "Reservas", "Branding"],
     githubUrl: "",
     liveUrl: "",
@@ -39,76 +35,66 @@ export const PROJECT_HIGHLIGHTS = [
 
 export const BLOG_ENTRIES = [
   {
-    title: "Noticias destacadas · 1.ª semana de febrero",
-    excerpt:
-      "Resumen de IA, apps y tendencias digitales con lo más relevante de la semana.",
-    date: "Febrero 2026",
+    title: "Cómo activo un laboratorio de video sin romper la UX",
+    excerpt: "Decisiones rápidas de UI/UX para lanzar el flujo de Grok con estados claros.",
+    date: "9 marzo 2026",
   },
   {
-    title: "Cómo diseño experiencias web memorables",
-    excerpt:
-      "Un vistazo a mis procesos para combinar estética, velocidad y resultados.",
-    date: "Marzo 2024",
+    title: "Paquete express: landing lista en 48h",
+    excerpt: "Wireframe, textos base y conexión a WhatsApp para salir a producción en dos días.",
+    date: "7 marzo 2026",
   },
   {
-    title: "Inspiración en apps conocidas",
-    excerpt:
-      "Qué podemos aprender de interfaces como Airbnb o Notion para proyectos locales.",
-    date: "Febrero 2024",
+    title: "Checklist nocturno de conversión",
+    excerpt: "Tres ajustes que suben contactos en móvil sin tocar el presupuesto.",
+    date: "8 marzo 2026",
   },
   {
-    title: "Tips rápidos para tu landing",
-    excerpt:
-      "Tres cambios que mejoran la conversión sin tocar el presupuesto.",
-    date: "Enero 2024",
+    title: "IA para el flujo diario",
+    excerpt: "Prompts cortos para borrar tareas repetitivas de soporte y copy.",
+    date: "8 marzo 2026",
   },
   {
-    title: "Roadmap de proyectos Robbe360",
-    excerpt:
-      "Plan de trabajo para levantar los clones (Spotify/Disney+), Kebab y Barbería.",
-    date: "Diciembre 2023",
+    title: "Core Web Vitals verdes en móvil",
+    excerpt: "Qué toqué para mantener LCP y CLS estables con laboratorios pesados.",
+    date: "12 dic 2025",
   },
 ];
 
 export const UPDATES = [
   {
-    title: "Adsense listo para revisión",
-    detail:
-      "El script de Google Ads se cargó en el layout para validar el dominio robbe360.com.",
-    date: "Marzo 2026",
+    title: "Video con Grok estable",
+    detail: "Prompt validado, estados claros y descarga MP4 una vez listo.",
+    date: "9 marzo 2026",
   },
   {
-    title: "Agenda en Google Calendar",
-    detail: "CTA de agenda directa para reservar sesiones de diagnóstico.",
-    date: "Marzo 2026",
+    title: "Pack landing 48h",
+    detail: "Oferta exprés con wireframe + textos base + CTA WhatsApp.",
+    date: "7 marzo 2026",
   },
   {
-    title: "Rutas activas",
-    detail: "Música, blog y proyectos se siguen actualizando con nuevos lanzamientos.",
-    date: "Febrero 2026",
+    title: "Adsense en revisión",
+    detail: "Script oficial cargado en layout, verificación de dominio enviada.",
+    date: "8 marzo 2026",
   },
 ];
 
 export const FAQ_ITEMS = [
   {
     question: "¿Cuánto tarda en estar lista una landing?",
-    answer:
-      "Una versión inicial funcional suele estar entre 5 y 10 días, según alcance y contenidos.",
+    answer: "Una versión inicial funcional suele estar entre 5 y 10 días, según alcance y contenidos.",
   },
   {
     question: "¿Puedo pedir cambios después de la entrega?",
-    answer:
-      "Sí. Incluyo una fase de ajustes para pulir textos, bloques visuales y conversión.",
+    answer: "Sí. Incluyo una fase de ajustes para pulir textos, bloques visuales y conversión.",
   },
   {
     question: "¿Trabajas solo en diseño o también en desarrollo?",
-    answer:
-      "Trabajo el proceso completo: estrategia, diseño, desarrollo y publicación final.",
+    answer: "Trabajo el proceso completo: estrategia, diseño, desarrollo y publicación final.",
   },
   {
     question: "¿La web queda optimizada para SEO?",
-    answer:
-      "Sí. Se configura SEO técnico base: metadata, sitemap, robots y estructura limpia para indexación.",
+    answer: "Sí. Configuro SEO técnico base: metadata, sitemap, robots y estructura limpia para indexación.",
   },
 ];
 
@@ -139,22 +125,19 @@ export const TESTIMONIALS = [
 export const MAIN_ROUTES = [
   {
     title: "Música & Poesía",
-    description:
-      "Espacio para letras propias, ideas creativas, fechas de registro y próximos lanzamientos.",
+    description: "Espacio para letras propias, ideas creativas y próximos lanzamientos.",
     href: "/musica",
     cta: "Ir a música",
   },
   {
     title: "Blog",
-    description:
-      "Noticias tech, tendencias y actualizaciones del mercado cada semana con entradas programadas.",
+    description: "Noticias tech, tendencias y actualizaciones del mercado cada semana.",
     href: "/blog",
     cta: "Ir al blog",
   },
   {
     title: "Proyectos",
-    description:
-      "Avances de los clones y soluciones para negocios locales con repos y demos.",
+    description: "Avances de los clones y soluciones para negocios locales con repos y demos.",
     href: "/proyectos",
     cta: "Ver proyectos",
   },
