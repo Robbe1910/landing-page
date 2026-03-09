@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  distDir: ".next-cache",
+  // Keep the default `.next` build output so Vercel can find the assets/functions
   images: {
     remotePatterns: [
       {
