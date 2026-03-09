@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Alfa_Slab_One, Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -19,6 +19,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const alfaSlabOne = Alfa_Slab_One({
+  variable: "--font-alfa-slab-one",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -52,7 +58,7 @@ export const metadata: Metadata = {
     siteName,
     title: defaultTitle,
     description: defaultDescription,
-    images: [{ url: ogImage, width: 1200, height: 630, alt: "Robbe360" }],
+    images: [{ url: ogImage, width: 5555, height: 5555, alt: "Robbe360" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -75,7 +81,11 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: { icon: "/favicon.ico" },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -110,7 +120,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${alfaSlabOne.variable} antialiased`}
         suppressHydrationWarning
       >
         <script

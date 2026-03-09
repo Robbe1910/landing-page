@@ -1,708 +1,80 @@
-'use client';
-import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
+﻿import dynamic from "next/dynamic";
 import Link from "next/link";
+import {
+  BLOG_ENTRIES,
+  FAQ_ITEMS,
+  MAIN_ROUTES,
+  PROJECT_HIGHLIGHTS,
+  TESTIMONIALS,
+  UPDATES,
+  WHATSAPP_MESSAGE,
+  WHATSAPP_NUMBER,
+} from "./home-data";
+import { HomeHero } from "../components/home-hero";
+import { VideoLab } from "../components/video-lab";
 
-type AdSlotProps = {
-  slot?: string;
-  format?: string;
-  layoutKey?: string;
-  className?: string;
-  style?: React.CSSProperties;
-};
+const VoiceLab = dynamic(() => import("../components/voice-lab").then((mod) => mod.VoiceLab), {
+  ssr: false,
+  loading: () => <section className="bg-slate-950 px-6 py-14 text-white"><div className="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8">Cargando laboratorio de voz...</div></section>,
+});
 
-const AdSlot: React.FC<AdSlotProps> = ({
-  slot,
-  format = "auto",
-  layoutKey,
-  className = "",
-  style,
-}) => {
-  const adRef = useRef<HTMLModElement>(null);
+const TtsCard = dynamic(() => import("../components/tts-card").then((mod) => mod.TtsCard), {
+  ssr: false,
+  loading: () => <section className="bg-gray-50 px-6 py-12"><div className="mx-auto max-w-5xl rounded-3xl border border-gray-200 bg-white p-8">Cargando sintetizador de voz...</div></section>,
+});
 
-  useEffect(() => {
-    if (!slot || !adRef.current) return;
-
-    try {
-      const w = window as typeof window & { adsbygoogle?: unknown[] };
-      w.adsbygoogle = w.adsbygoogle || [];
-      w.adsbygoogle.push({});
-    } catch (error) {
-      console.error("Adsense error", error);
-    }
-  }, [slot]);
-
-  if (!slot) return null;
-
-  return (
-    <ins
-      className={`adsbygoogle block ${className}`}
-      style={{ display: "block", ...(style || {}) }}
-      data-ad-client="ca-pub-7977064296204880"
-      data-ad-slot={slot}
-      data-ad-format={format}
-      data-full-width-responsive="true"
-      {...(layoutKey ? { "data-ad-layout-key": layoutKey } : {})}
-      ref={adRef}
-    />
-  );
-};
+const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export default function Home() {
-  const [isClient, setIsClient] = useState(false);
-  const testimonialsRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    const container = testimonialsRef.current;
-    if (!container || !window.matchMedia("(max-width: 767px)").matches) {
-      return;
-    }
-
-    const intervalId = window.setInterval(() => {
-      const firstCard = container.querySelector("article");
-      const cardWidth =
-        firstCard instanceof HTMLElement
-          ? firstCard.offsetWidth
-          : container.clientWidth * 0.85;
-      const step = cardWidth + 24;
-      const nextPosition = container.scrollLeft + step;
-      const maxScrollLeft = container.scrollWidth - container.clientWidth - 4;
-
-      if (nextPosition >= maxScrollLeft) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-        return;
-      }
-
-      container.scrollTo({ left: nextPosition, behavior: "smooth" });
-    }, 4000);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
-
-  const adSlots = {
-    hero: process.env.NEXT_PUBLIC_ADSENSE_SLOT_HERO,
-    sidebar: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR,
-    inline: process.env.NEXT_PUBLIC_ADSENSE_SLOT_INLINE,
-  };
-
-  const whatsappNumber = "609881656";
-  const whatsappMessage = "Hola, me gustaría obtener más información.";
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-  const googleCalendarLink = "https://calendar.app.google/r3uhjT7JKmDBcBxh9";
-  // Textos de proyectos (personalizable para Roberto).
-  const projectHighlights = [
-    {
-      title: "Clon Spotify",
-      description:
-        "Interfaz inmersiva con playlists, reproductor fijo y microinteracciones.",
-      tags: ["Clone UI", "Streaming", "Dark UI"],
-      githubUrl: "",
-      liveUrl: "",
-    },
-    {
-      title: "Clon Disney+",
-      description:
-        "Galerías cinematográficas, carruseles y navegación por categorías.",
-      tags: ["Clone UI", "Motion", "Catalogo"],
-      githubUrl: "",
-      liveUrl: "",
-    },
-    {
-      title: "Kebab house",
-      description:
-        "Landing con menú visual, pedidos rápidos y ubicación destacada.",
-      tags: ["Restaurantes", "Delivery", "Conversión"],
-      githubUrl: "",
-      liveUrl: "",
-    },
-    {
-      title: "Peluquería & barbería",
-      description:
-        "Reserva online, galería de cortes y CTA directo a WhatsApp.",
-      tags: ["Beauty", "Reservas", "Branding"],
-      githubUrl: "",
-      liveUrl: "",
-    },
-  ];
-
-  // Entradas de blog destacadas (personalizable para Roberto).
-  const blogEntries = [
-    {
-      title: "Noticias destacadas · 1ª semana de febrero",
-      excerpt:
-        "Resumen de IA, apps y tendencias digitales con lo más relevante de la semana.",
-      date: "Febrero 2026",
-    },
-    {
-      title: "Cómo diseño experiencias web memorables",
-      excerpt:
-        "Un vistazo a mis procesos para combinar estética, velocidad y resultados.",
-      date: "Marzo 2024",
-    },
-    {
-      title: "Inspiración en apps conocidas",
-      excerpt:
-        "Qué podemos aprender de interfaces como Airbnb o Notion para proyectos locales.",
-      date: "Febrero 2024",
-    },
-    {
-      title: "Tips rápidos para tu landing",
-      excerpt:
-        "Tres cambios que mejoran la conversión sin tocar el presupuesto.",
-      date: "Enero 2024",
-    },
-    {
-      title: "Roadmap de proyectos Robbe360",
-      excerpt:
-        "Plan de trabajo para levantar los clones (Spotify/Disney+), Kebab y Barbería.",
-      date: "Diciembre 2023",
-    },
-  ];
-
-  const updates = [
-    {
-      title: "Adsense listo para revisión",
-      detail: "El script de Google Ads se cargó en el layout para validar el dominio robbe360.com.",
-      date: "Marzo 2026",
-    },
-    {
-      title: "Agenda en Google Calendar",
-      detail: "CTA de agenda directa para reservar sesiones de diagnóstico.",
-      date: "Marzo 2026",
-    },
-    {
-      title: "Rutas activas",
-      detail: "Música, blog y proyectos se siguen actualizando con nuevos lanzamientos.",
-      date: "Febrero 2026",
-    },
-  ];
-
-  const faqItems = [
-    {
-      question: "Cuanto tarda en estar lista una landing?",
-      answer:
-        "Una version inicial funcional suele estar entre 5 y 10 dias, segun alcance y contenidos.",
-    },
-    {
-      question: "Puedo pedir cambios despues de la entrega?",
-      answer:
-        "Si. Incluyo una fase de ajustes para pulir textos, bloques visuales y conversion.",
-    },
-    {
-      question: "Trabajas solo en diseno o tambien en desarrollo?",
-      answer:
-        "Trabajo el proceso completo: estrategia, diseno, desarrollo y publicacion final.",
-    },
-    {
-      question: "La web queda optimizada para SEO?",
-      answer:
-        "Si. Se configura SEO tecnico base: metadata, sitemap, robots y estructura limpia para indexacion.",
-    },
-  ];
-
-  const testimonials = [
-    {
-      client: "Kebab House (local)",
-      problem: "Tenian visitas desde Instagram pero pocos pedidos cerrados.",
-      solution:
-        "Rediseñe la landing con menu visible, CTA de WhatsApp arriba y acceso rapido a ubicacion.",
-      result: "+42% en mensajes directos durante el primer mes.",
-    },
-    {
-      client: "Barberia de barrio",
-      problem: "La mayoria de clientes preguntaba horario por chat sin reservar.",
-      solution:
-        "Estructure servicios claros, bloque de reservas y recordatorios para evitar perdida de citas.",
-      result: "Mas reservas semanales y menos cancelaciones de ultima hora.",
-    },
-    {
-      client: "Marca personal freelance",
-      problem: "No transmitia valor y dependia solo de referencias.",
-      solution:
-        "Construimos una web con propuesta clara, portfolio y CTA de consulta en puntos clave.",
-      result: "Nuevos leads cualificados de forma constante.",
-    },
-  ];
-
   return (
-    <div className="min-h-screen w-full font-sans">
+    <main className="min-h-screen bg-black text-white">
+      <HomeHero />
 
-      {/* Hero Section */}
-      <header className="relative h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-lime-500 text-white">
-        <nav className="absolute top-6 left-1/2 flex -translate-x-1/2 flex-wrap items-center justify-center gap-4 text-sm font-semibold uppercase tracking-wide">
-          <Link
-            href="/musica"
-            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
-          >
-            Música
-          </Link>
-          <Link
-            href="/blog"
-            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/proyectos"
-            className="rounded-full border border-white/40 px-4 py-2 text-white/90 transition hover:border-white hover:text-white"
-          >
-            Proyectos
-          </Link>
-        </nav>
-        {isClient && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="mb-4"
-          >
-            {/* Contenedor responsive para el logo */}
-            <div className="relative w-32 h-32 md:w-44 md:h-44">
-              <Image
-                src="/logo.png"
-                alt="Logo Robbe"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </motion.div>
-        )}
-
-        {isClient && (
-          <motion.h1
-            className="text-5xl md:text-6xl font-extrabold drop-shadow-xl"
-            initial={{ y: -50 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Desarrollador Web
-          </motion.h1>
-        )}
-
-        {isClient && (
-          <motion.p
-            className="text-lg mt-4 max-w-xl"
-            initial={{ y: 50 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            Digitaliza tu negocio fácilmente
-          </motion.p>
-        )}
-
-        {isClient && (
-          <motion.a
-            href={googleCalendarLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 px-6 py-3 bg-white text-black font-bold rounded-full shadow-lg hover:bg-lime-400 transition duration-300"
-            whileHover={{ scale: 1.05 }}
-          >
-            Agendar una Consulta
-          </motion.a>
-        )}
-      </header>
-
-      {/* AdSense: hero debajo del pliegue */}
-      {adSlots.hero && (
-        <div className="bg-gray-950 px-6 pb-8">
-          <div className="max-w-6xl mx-auto">
-            <AdSlot
-              slot={adSlots.hero}
-              className="rounded-xl overflow-hidden"
-              style={{ minHeight: 90 }}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Sobre mí */}
-      <section className="py-16 px-6 bg-black text-white text-center">
+      <section className="bg-black px-6 py-16 text-center text-white">
         <h2 className="text-3xl font-semibold">Sobre Mí</h2>
-        <p className="mt-4 text-lg max-w-2xl mx-auto">
-          {/* Texto personalizable para Roberto */}
-          Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js.
-          Aquí iré compartiendo avances de mis rutas de música, blog y proyectos.
-        </p>
-        <a
-          href="https://www.linkedin.com/in/roberto-berrendo-eguino-475b36171/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-block px-6 py-3 bg-lime-500 text-black font-bold rounded-full hover:bg-lime-400 transition duration-300"
-        >
-          Visita mi LinkedIn
-        </a>
+        <p className="mx-auto mt-4 max-w-2xl text-lg">Soy Roberto Berrendo Eguino (Robbe), desarrollador web especializado en React, Angular y Node.js. Aquí iré compartiendo avances de mis rutas de música, blog y proyectos.</p>
       </section>
 
-      {/* Servicios */}
-      <section className="py-16 px-6 bg-white text-center">
-        <h2 className="text-3xl font-semibold text-black">Servicios</h2>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-1 gap-6">
-          <motion.div
-            className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-xl border-l-4 border-l-lime-500"
-            whileHover={{ scale: 1.05 }}
-          >
-            <h3 className="text-xl font-bold text-black">Desarrollo Web</h3>
-            <p className="mt-2 text-gray-700">
-              Páginas web, tiendas online y aplicaciones personalizadas para tu negocio.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Actualizaciones */}
-      <section className="py-14 px-6 bg-gray-900 text-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-gray-900 px-6 py-14 text-white">
+        <div className="mx-auto max-w-6xl">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-lime-400">Actualizaciones</p>
               <h2 className="text-3xl font-semibold">Lo último que estoy moviendo</h2>
             </div>
-            <p className="text-gray-300 max-w-xl">
-              Minirresúmenes rápidos para saber en qué estoy trabajando esta semana.
-            </p>
+            <p className="max-w-xl text-gray-300">Minirresúmenes rápidos para saber en qué estoy trabajando esta semana.</p>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {updates.map((update) => (
-              <article
-                key={update.title}
-                className="rounded-2xl border border-gray-800 bg-gray-950/70 p-5 shadow-sm"
-              >
-                <p className="text-xs uppercase tracking-[0.15em] text-lime-400">{update.date}</p>
-                <h3 className="mt-2 text-lg font-semibold">{update.title}</h3>
-                <p className="mt-2 text-gray-300">{update.detail}</p>
-              </article>
-            ))}
-          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">{UPDATES.map((update) => <article key={update.title} className="rounded-2xl border border-gray-800 bg-gray-950/70 p-5 shadow-sm"><p className="text-xs uppercase tracking-[0.15em] text-lime-400">{update.date}</p><h3 className="mt-2 text-lg font-semibold">{update.title}</h3><p className="mt-2 text-gray-300">{update.detail}</p></article>)}</div>
         </div>
       </section>
 
-      {/* Rutas principales */}
-      <section className="py-16 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-black">Rutas principales</h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Explora mis espacios de música, publicaciones y proyectos activos con contenido en evolución.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Música & Poesía",
-              description:
-                "Espacio para letras propias, ideas creativas, fechas de registro y próximos lanzamientos.",
-              href: "/musica",
-              cta: "Ir a música",
-            },
-            {
-              title: "Blog",
-              description:
-                "Noticias tech, tendencias y actualizaciones del mercado cada semana con entradas programadas.",
-              href: "/blog",
-              cta: "Ir al blog",
-            },
-            {
-              title: "Proyectos",
-              description:
-                "Avances de los clones y soluciones para negocios locales con repos y demos.",
-              href: "/proyectos",
-              cta: "Ver proyectos",
-            },
-          ].map((route) => (
-            <Link
-              key={route.title}
-              href={route.href}
-              className="group rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-            >
-              <h3 className="text-xl font-semibold text-black">{route.title}</h3>
-              <p className="mt-3 text-gray-600">{route.description}</p>
-              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-lime-600">
-                {route.cta}
-                <span className="transition group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-          ))}
-        </div>
+      <VideoLab />
+      <VoiceLab />
+      <TtsCard />
+
+      <section className="bg-gray-50 px-6 py-16">
+        <div className="mx-auto max-w-6xl text-center"><h2 className="text-3xl font-semibold text-black">Rutas principales</h2><p className="mt-4 text-lg text-gray-600">Explora mis espacios de música, publicaciones y proyectos activos con contenido en evolución.</p></div>
+        <div className="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-3">{MAIN_ROUTES.map((route) => <Link key={route.title} href={route.href} className="group rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg"><h3 className="text-xl font-semibold text-black">{route.title}</h3><p className="mt-3 text-gray-600">{route.description}</p><span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-lime-600">{route.cta}<span className="transition group-hover:translate-x-1">→</span></span></Link>)}</div>
       </section>
 
-      {/* Portfolio */}
-      <section className="py-16 px-6 bg-black text-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Proyectos Destacados</h2>
-          <p className="mt-4 text-lg text-gray-300">
-            Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca y publicados con dominio propio.
-          </p>
-        </div>
-        <div className="mt-8 max-w-6xl mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {/* Checklist de lo que se va a ejecutar en la web */}
-          {[
-            "Crear repositorios en GitHub",
-            "Diseñar UI + assets",
-            "Desarrollar MVP funcional",
-            "Publicar en Vercel y conectar dominio",
-          ].map((step) => (
-            <div
-              key={step}
-              className="rounded-2xl border border-gray-700 bg-gray-900/60 px-4 py-3 text-sm text-gray-300"
-            >
-              {step}
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-          {projectHighlights.map((project) => (
-            <motion.article
-              key={project.title}
-              whileHover={{ y: -6 }}
-              className="bg-gray-900/80 border border-gray-700 rounded-2xl p-6 shadow-lg"
-            >
-              <h3 className="text-xl font-bold">{project.title}</h3>
-              <p className="mt-3 text-gray-300">{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-semibold px-3 py-1 rounded-full bg-lime-500/10 text-lime-300 border border-lime-500/40"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {project.liveUrl ? (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-lime-500 px-4 py-2 text-sm font-semibold text-black hover:bg-lime-400 transition"
-                  >
-                    Ver demo
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center justify-center rounded-full bg-gray-800 px-4 py-2 text-sm font-semibold text-gray-400">
-                    Demo en preparación
-                  </span>
-                )}
-                {project.githubUrl ? (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-200 hover:border-lime-400 hover:text-lime-300 transition"
-                  >
-                    GitHub
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center justify-center rounded-full border border-gray-700 px-4 py-2 text-sm font-semibold text-gray-500">
-                    GitHub pendiente
-                  </span>
-                )}
-              </div>
-            </motion.article>
-          ))}
-        </div>
-        <p className="mt-8 text-center text-sm text-gray-400">
-          {/* Texto personalizable para Roberto */}
-          Comparte los enlaces reales de GitHub y Vercel para activar los botones
-          de demo y repositorio en cada proyecto. Aquí también se mostrará el
-          progreso de cada lanzamiento.
-        </p>
+      <section className="bg-black px-6 py-16 text-white">
+        <div className="mx-auto max-w-6xl text-center"><h2 className="text-3xl font-semibold">Proyectos destacados</h2><p className="mt-4 text-lg text-gray-300">Diseños inspirados en páginas web y apps conocidas, adaptados a tu marca y publicados con dominio propio.</p></div>
+        <div className="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-4">{PROJECT_HIGHLIGHTS.map((project) => <article key={project.title} className="rounded-2xl border border-gray-700 bg-gray-900/80 p-6 shadow-lg transition hover:-translate-y-1"><h3 className="text-xl font-bold">{project.title}</h3><p className="mt-3 text-gray-300">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.tags.map((tag) => <span key={tag} className="rounded-full border border-lime-500/40 bg-lime-500/10 px-3 py-1 text-xs font-semibold text-lime-300">{tag}</span>)}</div></article>)}</div>
       </section>
 
-      {/* Blog & Social */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
-          <div>
-            <h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2>
-            <p className="mt-4 text-lg text-gray-700">
-              Comparto ideas sobre diseño, marketing digital y desarrollo web con resúmenes semanales.
-            </p>
-            <div className="mt-8 space-y-6">
-              {blogEntries.map((entry) => (
-                <article
-                  key={entry.title}
-                  className="rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition"
-                >
-                  <p className="text-sm text-gray-500">{entry.date}</p>
-                  <h3 className="text-xl font-semibold text-black mt-2">
-                    {entry.title}
-                  </h3>
-                  <p className="mt-2 text-gray-700">{entry.excerpt}</p>
-                </article>
-              ))}
-            </div>
-            <Link
-              href="/blog"
-              className="mt-8 inline-flex items-center justify-center rounded-full border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 transition hover:border-lime-400 hover:text-lime-600"
-            >
-              Visitar el blog completo
-            </Link>
-          </div>
-          <div className="bg-black text-white rounded-2xl p-6 shadow-lg">
-            <h3 className="text-2xl font-semibold">Conecta en redes</h3>
-            <p className="mt-3 text-gray-300">
-              Sígueme para ver más proyectos, tips y procesos creativos.
-            </p>
-            <div className="mt-6 flex flex-col gap-3">
-              <a
-                href="https://www.tiktok.com/@rxbbe8369"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between rounded-full bg-white text-black px-5 py-3 font-semibold hover:bg-lime-400 transition"
-              >
-                TikTok @RXBBE8369
-                <span className="text-sm">Ver videos</span>
-              </a>
-              <a
-                href="https://www.instagram.com/rxbbe8369/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between rounded-full bg-white text-black px-5 py-3 font-semibold hover:bg-lime-400 transition"
-              >
-                Instagram @RXBBE8369
-                <span className="text-sm">Galería</span>
-              </a>
-              <a
-                href="mailto:robertoberrendo@gmail.com"
-                className="flex items-center justify-between rounded-full border border-lime-400 text-lime-300 px-5 py-3 font-semibold hover:bg-lime-400/10 transition"
-              >
-                Escribe por email
-                <span className="text-sm">robertoberrendo@gmail.com</span>
-              </a>
-            </div>
-            {adSlots.sidebar && (
-              <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-3">
-                <AdSlot
-                  slot={adSlots.sidebar}
-                  className="overflow-hidden rounded-lg"
-                  style={{ minHeight: 250 }}
-                />
-              </div>
-            )}
-          </div>
-        </div>
+      <section className="bg-white px-6 py-16">
+        <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[1.2fr_0.8fr]"><div><h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2><p className="mt-4 text-lg text-gray-700">Comparto ideas sobre diseño, marketing digital y desarrollo web con resúmenes semanales.</p><div className="mt-8 space-y-6">{BLOG_ENTRIES.map((entry) => <article key={entry.title} className="rounded-xl border border-gray-200 p-5 shadow-sm transition hover:shadow-md"><p className="text-sm text-gray-500">{entry.date}</p><h3 className="mt-2 text-xl font-semibold text-black">{entry.title}</h3><p className="mt-2 text-gray-700">{entry.excerpt}</p></article>)}</div></div><div className="rounded-2xl bg-black p-6 text-white shadow-lg"><h3 className="text-2xl font-semibold">Conecta en redes</h3><p className="mt-3 text-gray-300">Sígueme para ver más proyectos, tips y procesos creativos.</p></div></div>
       </section>
 
-      {/* Testimonios */}
-      <section className="py-16 px-6 bg-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center">
-            <h2 className="text-3xl font-semibold text-black">Testimonios y resultados</h2>
-            <p className="mt-4 text-gray-600">
-              Casos tipo de clientes con foco en conversion y crecimiento real.
-            </p>
-          </div>
-          <p className="mt-6 text-center text-sm text-gray-500 md:hidden">
-            Desliza para ver mas testimonios
-          </p>
-          <div
-            ref={testimonialsRef}
-            className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible"
-          >
-            {testimonials.map((testimonial) => (
-              <article
-                key={testimonial.client}
-                className="min-w-[85%] snap-start rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:min-w-[60%] md:min-w-0"
-              >
-                <p className="text-xs uppercase tracking-[0.2em] text-lime-600">
-                  {testimonial.client}
-                </p>
-                <h3 className="mt-4 text-lg font-semibold text-black">Problema</h3>
-                <p className="mt-2 text-gray-700">{testimonial.problem}</p>
-                <h3 className="mt-4 text-lg font-semibold text-black">Solucion</h3>
-                <p className="mt-2 text-gray-700">{testimonial.solution}</p>
-                <h3 className="mt-4 text-lg font-semibold text-black">Resultado</h3>
-                <p className="mt-2 font-semibold text-lime-700">{testimonial.result}</p>
-              </article>
-            ))}
-          </div>
-        </div>
+      <section className="bg-gray-100 px-6 py-16">
+        <div className="mx-auto max-w-6xl"><div className="text-center"><h2 className="text-3xl font-semibold text-black">Testimonios y resultados</h2><p className="mt-4 text-gray-600">Casos tipo de clientes con foco en conversión y crecimiento real.</p></div><div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible">{TESTIMONIALS.map((testimonial) => <article key={testimonial.client} className="min-w-[85%] snap-start rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:min-w-[60%] md:min-w-0"><p className="text-xs uppercase tracking-[0.2em] text-lime-600">{testimonial.client}</p><h3 className="mt-4 text-lg font-semibold text-black">Problema</h3><p className="mt-2 text-gray-700">{testimonial.problem}</p><h3 className="mt-4 text-lg font-semibold text-black">Solución</h3><p className="mt-2 text-gray-700">{testimonial.solution}</p><h3 className="mt-4 text-lg font-semibold text-black">Resultado</h3><p className="mt-2 font-semibold text-lime-700">{testimonial.result}</p></article>)}</div></div>
       </section>
 
-      {/* Contacto */}
-      <section className="py-16 px-6 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center">
-            <h2 className="text-3xl font-semibold text-black">Preguntas frecuentes</h2>
-            <p className="mt-4 text-gray-600">
-              Respuestas rapidas para que tengas claro como trabajamos y que esperar.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-4">
-            {faqItems.map((item) => (
-              <article
-                key={item.question}
-                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
-              >
-                <h3 className="text-lg font-semibold text-black">{item.question}</h3>
-                <p className="mt-3 text-gray-700">{item.answer}</p>
-              </article>
-            ))}
-          </div>
-        </div>
+      <section className="bg-gray-50 px-6 py-16">
+        <div className="mx-auto max-w-5xl"><div className="text-center"><h2 className="text-3xl font-semibold text-black">Preguntas frecuentes</h2><p className="mt-4 text-gray-600">Respuestas rápidas para que tengas claro cómo trabajamos y qué esperar.</p></div><div className="mt-10 grid gap-4">{FAQ_ITEMS.map((item) => <article key={item.question} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"><h3 className="text-lg font-semibold text-black">{item.question}</h3><p className="mt-3 text-gray-700">{item.answer}</p></article>)}</div></div>
       </section>
 
-      {/* AdSense: bloque medio */}
-      {adSlots.inline && (
-        <div className="bg-gray-50 px-6 pb-12">
-          <div className="max-w-5xl mx-auto">
-            <AdSlot
-              slot={adSlots.inline}
-              className="rounded-xl overflow-hidden"
-              style={{ minHeight: 90 }}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Contacto */}
-      <section className="py-16 px-6 bg-black text-white text-center">
-        <h2 className="text-3xl font-semibold">Contacto</h2>
-        <p className="mt-4">Contáctame sin compromiso.</p>
-        <motion.a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="
-            mt-6 
-            inline-block 
-            px-6 
-            py-3 
-            bg-lime-500 
-            text-black 
-            font-bold 
-            rounded-full 
-            hover:bg-lime-400 
-            transition 
-            duration-300
-          "
-          whileHover={{ scale: 1.05 }}
-        >
-          WhatsApp
-        </motion.a>
-      </section>
-
-      <footer className="bg-gray-950 text-gray-300 py-10 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-gray-500">©</p>
-          <p className="text-lg font-semibold text-white">
-            {/* Texto personalizable para Roberto */}
-            2026 Roberto Berrendo Eguino. Todos los derechos reservados.
-          </p>
-          <Link
-            href="/privacidad"
-            className="text-sm font-semibold text-lime-300 hover:text-lime-200 transition"
-          >
-            Política de privacidad 2026 · Roberto Berrendo Eguino
-          </Link>
-        </div>
-      </footer>
-    </div>
+      <section className="bg-black px-6 py-16 text-center text-white"><h2 className="text-3xl font-semibold">Contacto</h2><p className="mt-4">Contáctame sin compromiso.</p><a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block rounded-full bg-lime-500 px-6 py-3 font-bold text-black transition duration-300 hover:bg-lime-400">WhatsApp</a></section>
+    </main>
   );
 }
