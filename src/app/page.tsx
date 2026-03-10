@@ -65,7 +65,73 @@ export default function Home() {
       </section>
 
       <section className="bg-white px-6 py-16">
-        <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[1.2fr_0.8fr]"><div><h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2><p className="mt-4 text-lg text-gray-700">Comparto ideas sobre diseño, marketing digital y desarrollo web con resúmenes semanales.</p><div className="mt-8 space-y-6">{BLOG_ENTRIES.map((entry) => <article key={entry.title} className="rounded-xl border border-gray-200 p-5 shadow-sm transition hover:shadow-md"><p className="text-sm text-gray-500">{entry.date}</p><h3 className="mt-2 text-xl font-semibold text-black">{entry.title}</h3><p className="mt-2 text-gray-700">{entry.excerpt}</p></article>)}</div></div><div className="rounded-2xl bg-black p-6 text-white shadow-lg"><h3 className="text-2xl font-semibold">Conecta en redes</h3><p className="mt-3 text-gray-300">Sígueme para ver más proyectos, tips y procesos creativos.</p></div></div>
+        <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+          <div>
+            <h2 className="text-3xl font-semibold text-black">Blog & Recursos</h2>
+            <p className="mt-4 text-lg text-gray-700">
+              Comparto ideas sobre diseño, marketing digital y desarrollo web con resúmenes semanales.
+            </p>
+            <div className="mt-8 space-y-6">
+              {BLOG_ENTRIES.map((entry) => (
+                <article
+                  key={entry.title}
+                  className="rounded-xl border border-gray-200 p-5 shadow-sm transition hover:shadow-md"
+                >
+                  <p className="text-sm text-gray-500">{entry.date}</p>
+                  <h3 className="mt-2 text-xl font-semibold text-black">{entry.title}</h3>
+                  <p className="mt-2 text-gray-700">{entry.excerpt}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-black p-6 text-white shadow-lg">
+            <h3 className="text-2xl font-semibold">Conecta en redes</h3>
+            <p className="mt-3 text-gray-300">
+              Sígueme para ver más proyectos, tips y procesos creativos.
+            </p>
+            <div className="mt-4 space-y-3">
+              <a
+                href="https://www.instagram.com/rxbbe8369/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:border-lime-400 hover:text-lime-200"
+              >
+                Instagram <span className="text-xs text-gray-400">rxbbe8369</span>
+              </a>
+              <a
+                href="https://www.tiktok.com/@rxbbe8369"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:border-lime-400 hover:text-lime-200"
+              >
+                TikTok <span className="text-xs text-gray-400">@rxbbe8369</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/roberto-berrendo-eguino-475b36171/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:border-lime-400 hover:text-lime-200"
+              >
+                LinkedIn <span className="text-xs text-gray-400">Perfil</span>
+              </a>
+              <a
+                href="mailto:robertoberrendo@gmail.com"
+                className="flex items-center justify-between rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold transition hover:border-lime-400 hover:text-lime-200"
+              >
+                Email <span className="text-xs text-gray-400">robertoberrendo@gmail.com</span>
+              </a>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center rounded-full bg-lime-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-lime-400"
+              >
+                Escríbeme por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="bg-gray-100 px-6 py-16">

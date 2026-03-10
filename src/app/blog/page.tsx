@@ -4,8 +4,8 @@ import {
   getAutomatedBlogEntries,
   getRealBlogEntries,
 } from "../../data/blogEntries";
-import { socialPosts } from "../../data/socialPosts";
 import { NewsBoard } from "../../components/news-board";
+import { InstagramEmbeds } from "../../components/instagram-embeds";
 
 export default function BlogPage() {
   const realBlogEntries = getRealBlogEntries();
@@ -153,29 +153,7 @@ export default function BlogPage() {
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {socialPosts.map((post) => (
-              <article
-                key={post.id}
-                className="rounded-xl border border-white/20 bg-white/5 p-5 transition hover:bg-white/10"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full border border-lime-400/50 px-3 py-1 text-xs font-semibold text-lime-300">
-                    {post.platform}
-                  </span>
-                  <span className="text-xs text-gray-400">{post.date}</span>
-                </div>
-                <h3 className="mt-3 text-lg font-semibold">{post.title}</h3>
-                <p className="mt-2 text-sm text-gray-300">{post.excerpt}</p>
-                <a
-                  href={post.postUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center text-sm font-semibold text-lime-300 transition hover:text-lime-200"
-                >
-                  Ir al post
-                </a>
-              </article>
-            ))}
+            <InstagramEmbeds className="md:col-span-3" />
           </div>
         </section>
 

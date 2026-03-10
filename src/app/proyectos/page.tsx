@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { InstagramEmbeds } from "../../components/instagram-embeds";
 
 // Roadmap de proyectos (personalizable para Roberto).
 const projectRoadmap = [
@@ -22,12 +23,11 @@ const projectRoadmap = [
 
 export default function ProyectosPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-16">
-      <div className="max-w-5xl mx-auto">
+    <main className="min-h-screen bg-black text-white">
+      <div className="mx-auto max-w-5xl px-6 py-16">
         <p className="text-sm uppercase tracking-[0.3em] text-lime-400">Proyectos</p>
         <h1 className="mt-4 text-4xl font-bold">Roadmap activo</h1>
         <p className="mt-4 text-lg text-gray-300">
-          {/* Texto personalizable para Roberto */}
           Aquí se mostrarán los repositorios, demos y fechas de publicación cuando estén listos.
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -59,6 +59,8 @@ export default function ProyectosPage() {
           </Link>
         </div>
       </div>
+
+      <InstagramEmbeds />
     </main>
   );
 }
