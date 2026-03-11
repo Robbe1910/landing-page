@@ -4,26 +4,26 @@ import { useEffect, useState } from "react";
 
 const decodeSteps = [
   {
-    title: "369 leído como patrón",
+    title: "369 como lectura",
     detail:
-      "Inviertes el 3 y aparece una primera silueta de 8: antes de ejecutar, toca aprender a leer mejor el sistema.",
+      "Primero hay que leer el patrón: entender qué está fallando, dónde se pierde claridad y qué parte del sistema conviene ordenar.",
   },
   {
-    title: "6 y 9 cerrando ciclo",
+    title: "Cerrar el ciclo",
     detail:
-      "Cuando se espejan aparece otro 8: equilibrio entre idea, estructura y la forma concreta de aterrizarla.",
+      "Cuando idea, estructura y ejecución se alinean, la pieza deja de ser una promesa y empieza a ser una salida real.",
   },
   {
-    title: "El tercer 8 es constancia",
+    title: "888 como consistencia",
     detail:
-      "La repetición no es humo. Es método, iteración y aguante hasta que la pieza responde como debe.",
+      "El símbolo aquí no es humo. Es repetición útil, método y constancia hasta que la solución aguanta.",
   },
 ];
 
 const codeTraits = [
-  "Estructura antes que ruido.",
-  "Proceso real antes que humo.",
-  "Constancia antes que promesa vacía.",
+  "Leer antes de tocar.",
+  "Estructurar antes de decorar.",
+  "Iterar hasta que funcione.",
 ];
 
 export function HomeCodeReveal() {
@@ -59,22 +59,16 @@ export function HomeCodeReveal() {
       </div>
 
       <div className="relative z-10 text-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#4dd4ff]">
-          Código 888
-        </p>
-        <h3 className="mt-3 text-3xl font-semibold text-white">
-          Precisión técnica con símbolo propio
-        </h3>
+        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#4dd4ff]">Código 888</p>
+        <h3 className="mt-3 text-3xl font-semibold text-white">Una capa de identidad para recordar método.</h3>
         <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-white/72">
-          El 888 en Robbe360 no tapa el trabajo. Lo ordena. Sirve para recordar estructura, repetición
-          deliberada y consistencia cuando toca construir algo que de verdad funcione.
+          El 888 no sustituye el trabajo. En Robbe360 funciona como recordatorio visual de orden, consistencia y
+          ejecución técnica sostenida.
         </p>
 
         <div className="mx-auto mt-8 max-w-4xl rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(2,7,16,0.98),rgba(3,10,20,0.92))] px-6 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_24px_70px_rgba(3,8,20,0.3)]">
           <div className="pointer-events-none absolute inset-x-12 top-[7.2rem] h-px bg-[linear-gradient(90deg,transparent,rgba(186,242,108,0.16),transparent)]" />
-          <p className="text-[11px] font-semibold uppercase tracking-[0.42em] text-white/40">
-            Secuencia 369 · 888
-          </p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.42em] text-white/40">Secuencia 369 · 888</p>
 
           <div className="mt-6 min-h-[7rem]">
             <span
@@ -96,10 +90,10 @@ export function HomeCodeReveal() {
             aria-hidden={!isOpen}
           >
             <p className="text-lg leading-8 text-white/76">
-              Del patrón a la ejecución. Cuando la idea se ordena, el sistema deja de sonar místico y empieza a funcionar.
+              Cuando el patrón se entiende, la solución deja de sonar abstracta y empieza a responder como sistema.
             </p>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.28em] text-[#baf26c]">
-              Acceso concedido · Robbe360
+              Secuencia abierta · Robbe360
             </p>
           </div>
 
@@ -135,8 +129,8 @@ export function HomeCodeReveal() {
       >
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6 text-left">
           <p className="text-base leading-8 text-white/76">
-            El 369 aquí no entra como teoría vacía. Funciona como recordatorio visual de cómo ordeno el
-            trabajo: leer patrones, cerrar ciclos y sostener consistencia hasta que la pieza aguante de verdad.
+            El 369 entra aquí como una forma de pensar el trabajo: leer señales, cerrar ciclos y sostener consistencia
+            hasta que la pieza aguanta fuera del mock y fuera de la teoría.
           </p>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -153,9 +147,8 @@ export function HomeCodeReveal() {
 
           <div className="mt-6 rounded-[1.25rem] border border-white/10 bg-[rgba(8,21,38,0.9)] p-5">
             <p className="text-base leading-8 text-white/76">
-              XEMOS me sirvió para aterrizar esa lógica en algo concreto: ocho puntos de precisión,
-              sensores, app complementaria y una manera de pensar donde código y sistema físico se
-              entienden entre sí.
+              XEMOS ayudó a aterrizar esa lógica en algo concreto: sensores, app complementaria, integración física y un
+              proyecto que fue capaz de defenderse bajo exigencia técnica real.
             </p>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {codeTraits.map((item) => (
