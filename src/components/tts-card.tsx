@@ -55,7 +55,7 @@ export function TtsCard() {
     <section className="bg-gray-50 px-6 py-12">
       <div className="mx-auto grid max-w-5xl items-start gap-6 lg:grid-cols-[1fr_0.9fr]">
         <div className="space-y-3">
-          <p className="text-sm uppercase tracking-[0.2em] text-lime-600">Text-to-Speech</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-[#4dd4ff]">Text-to-Speech</p>
           <h2 className="text-3xl font-semibold text-black">Voz Eve on-demand (mp3)</h2>
           <p className="text-gray-700">Genera audio bajo clic y reprodúcelo en la página. La clave se usa solo en el backend.</p>
           <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600">
@@ -71,12 +71,12 @@ export function TtsCard() {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:border-lime-500 focus:outline-none"
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#4dd4ff] focus:outline-none"
               rows={4}
               placeholder="Escribe el texto que quieras convertir a audio..."
               suppressHydrationWarning
             />
-            <button type="submit" disabled={isLoading} suppressHydrationWarning className="w-full rounded-xl bg-lime-500 px-4 py-3 font-bold text-black transition hover:bg-lime-400 disabled:opacity-60">
+            <button type="submit" disabled={isLoading} suppressHydrationWarning className="w-full rounded-xl bg-[linear-gradient(90deg,#3f66ff_0%,#2dd4ff_100%)] px-4 py-3 font-bold text-white transition hover:opacity-95 disabled:opacity-60">
               {isLoading ? "Generando..." : "Generar y reproducir"}
             </button>
           </form>

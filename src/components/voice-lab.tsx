@@ -252,7 +252,7 @@ export function VoiceLab() {
     <section className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-6 py-14 text-white">
       <div className="mx-auto grid max-w-6xl items-start gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-3">
-          <p className="text-sm uppercase tracking-[0.2em] text-lime-400">Voz en tiempo real</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-[#4dd4ff]">Voz en tiempo real</p>
           <h2 className="text-3xl font-semibold">Agente de voz con Grok</h2>
           <p className="text-gray-200">Conecta micrófono y altavoces del navegador. Usamos token efímero, VAD del servidor y transcripción en vivo.</p>
           <div className="grid gap-3 rounded-xl border border-slate-800 bg-black/40 p-4">
@@ -270,7 +270,7 @@ export function VoiceLab() {
         <div className="space-y-4 rounded-2xl border border-slate-800 bg-black/60 p-6 shadow-xl">
           <div className="flex items-center justify-between">
             <p className="text-sm capitalize text-gray-200">{status}</p>
-            <button type="button" onClick={status === "idle" || status === "error" ? connect : disconnect} className={`rounded-full px-5 py-2 text-sm font-semibold transition ${status === "idle" || status === "error" ? "bg-lime-400 text-black hover:bg-lime-300" : "bg-red-500 text-white hover:bg-red-400"}`}>{status === "idle" || status === "error" ? "Conectar" : "Detener"}</button>
+            <button type="button" onClick={status === "idle" || status === "error" ? connect : disconnect} className={`rounded-full px-5 py-2 text-sm font-semibold transition ${status === "idle" || status === "error" ? "bg-[linear-gradient(90deg,#3f66ff_0%,#2dd4ff_100%)] text-white hover:opacity-95" : "bg-red-500 text-white hover:bg-red-400"}`}>{status === "idle" || status === "error" ? "Conectar" : "Detener"}</button>
           </div>
           <div className="max-h-[360px] space-y-3 overflow-y-auto pr-1">
             {transcript.length === 0 && <p className="text-sm text-gray-500">Aún no hay mensajes. Pulsa conectar y habla.</p>}

@@ -1,21 +1,20 @@
 import type { MetadataRoute } from "next";
 import { blogEntries } from "../data/blogEntries";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://robbe360.com";
+import { siteConfig } from "../lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticRoutes = ["", "/blog", "/musica", "/proyectos", "/privacidad"];
+  const staticRoutes = ["", "/blog", "/musica", "/proyectos"];
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-    url: `${siteUrl}${route}`,
+    url: `${siteConfig.url}${route}`,
     lastModified: now,
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency: route === "" ? "weekly" : route === "/blog" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : route === "/blog" ? 0.9 : 0.8,
   }));
 
   const blogSitemapEntries: MetadataRoute.Sitemap = blogEntries.map((entry) => ({
-    url: `${siteUrl}/blog/${entry.slug}`,
+    url: `${siteConfig.url}/blog/${entry.slug}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.7,

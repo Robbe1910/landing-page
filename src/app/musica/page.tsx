@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { AdSenseBlock } from "../../components/adsense-block";
 import { poetryEntries } from "../../data/poetryEntries";
+import { buildMetadata } from "../../lib/site-config";
 
 const slotLabels: Record<(typeof poetryEntries)[number]["slot"], string> = {
   desayuno: "Desayuno",
@@ -7,30 +10,37 @@ const slotLabels: Record<(typeof poetryEntries)[number]["slot"], string> = {
   cena: "Cena",
 };
 
+export const metadata: Metadata = buildMetadata({
+  title: "Musica y poesia",
+  description:
+    "La capa creativa de Robbe360: poesia breve, ritmo editorial diario y piezas cortas publicadas por franjas en horario de Espana.",
+  path: "/musica",
+  keywords: ["musica y poesia", "poesia diaria", "creatividad de marca", "contenido editorial"],
+});
+
 export default function MusicaPage() {
   return (
-    <main className="min-h-screen bg-black px-6 py-16 text-white">
-      <div className="mx-auto max-w-5xl">
-        <p className="text-sm uppercase tracking-[0.3em] text-lime-400">
-          Musica y poesia
-        </p>
-        <h1 className="mt-4 text-4xl font-bold">Espacio creativo</h1>
-        <p className="mt-4 text-lg text-gray-300">
-          Aqui queda preparada la rutina automatizada de poesia diaria por
-          franja en horario de Espana, publicando una hora antes de cada comida.
+    <main className="min-h-screen bg-[var(--background)] px-6 py-16 text-white sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-6xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#4dd4ff]">Música y poesía</p>
+        <h1 className="mt-4 text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
+          La parte humana de la marca también tiene estructura.
+        </h1>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-white/68">
+          Este espacio mantiene la sensibilidad creativa dentro del sistema. Piezas cortas, ritmo diario y una lógica
+          editorial que acompaña desayuno, comida y cena en horario de España.
         </p>
 
-        <section className="mt-8 rounded-2xl border border-lime-500/30 bg-lime-500/10 p-6">
-          <h2 className="text-xl font-semibold text-lime-300">
-            Programacion automatizada (España)
-          </h2>
-          <p className="mt-2 text-sm text-gray-200">
-            Zona horaria: <span className="font-semibold">Europe/Madrid</span>.
-            Cadencia: <span className="font-semibold">Diario</span>.
+        <AdSenseBlock slot="7413946655" className="mt-10" />
+
+        <section className="mt-10 rounded-[2rem] border border-white/10 bg-[rgba(6,12,26,0.82)] p-6 shadow-[0_32px_80px_rgba(3,8,20,0.28)]">
+          <h2 className="text-xl font-semibold text-white">Programación automatizada (España)</h2>
+          <p className="mt-3 text-sm leading-7 text-white/68">
+            Zona horaria: <span className="font-semibold text-white">Europe/Madrid</span>. Cadencia:{" "}
+            <span className="font-semibold text-white">Diario</span>.
           </p>
-          <p className="mt-2 text-sm text-gray-300">
-            Regla aplicada: cada entrada se publica exactamente 1 hora antes de
-            la franja objetivo (desayuno, comida y cena).
+          <p className="mt-2 text-sm leading-7 text-white/68">
+            Regla aplicada: cada entrada se publica exactamente una hora antes de la franja objetivo.
           </p>
         </section>
 
@@ -38,33 +48,29 @@ export default function MusicaPage() {
           {poetryEntries.map((entry) => (
             <article
               key={entry.id}
-              className="rounded-2xl border border-gray-800 bg-gray-900/70 p-5 shadow-lg"
+              className="rounded-[1.8rem] border border-white/10 bg-[rgba(6,12,26,0.82)] p-5 shadow-[0_26px_70px_rgba(3,8,20,0.24)]"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="rounded-full border border-lime-400/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-lime-300">
+                <span className="rounded-full border border-[#4dd4ff]/20 bg-[#081526] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#4dd4ff]">
                   {slotLabels[entry.slot]}
                 </span>
-                <span className="text-xs text-gray-400">{entry.cadence}</span>
+                <span className="text-xs text-white/45">{entry.cadence}</span>
               </div>
-              <h3 className="mt-3 text-xl font-semibold">{entry.title}</h3>
-              <p className="mt-2 text-sm text-gray-300">{entry.excerpt}</p>
+              <h3 className="mt-3 text-2xl font-semibold text-white">{entry.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-white/66">{entry.excerpt}</p>
 
-              <div className="mt-4 rounded-xl border border-gray-700 bg-black/40 p-3 text-xs text-gray-300">
+              <div className="mt-4 rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-3 text-xs text-white/62">
                 <p>
                   Hora objetivo ({slotLabels[entry.slot]}):{" "}
-                  <span className="font-semibold text-white">
-                    {entry.targetMealTimeSpain}
-                  </span>
+                  <span className="font-semibold text-white">{entry.targetMealTimeSpain}</span>
                 </p>
                 <p className="mt-1">
-                  Publicacion automatica:{" "}
-                  <span className="font-semibold text-lime-300">
-                    {entry.publishTimeSpain}
-                  </span>
+                  Publicación automática:{" "}
+                  <span className="font-semibold text-[#f6b34a]">{entry.publishTimeSpain}</span>
                 </p>
               </div>
 
-              <div className="mt-4 space-y-2 text-sm leading-7 text-gray-200">
+              <div className="mt-4 space-y-2 text-sm leading-7 text-white/74">
                 {entry.lines.map((line) => (
                   <p key={line}>{line}</p>
                 ))}
@@ -76,15 +82,21 @@ export default function MusicaPage() {
         <div className="mt-10 flex flex-wrap gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-gray-700 px-5 py-3 text-sm font-semibold text-gray-200 transition hover:border-lime-400 hover:text-lime-300"
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:border-[#4dd4ff]/40 hover:bg-white/[0.06]"
           >
             Volver al inicio
           </Link>
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 rounded-full bg-lime-500 px-5 py-3 text-sm font-semibold text-black transition hover:bg-lime-400"
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:border-[#4dd4ff]/40 hover:bg-white/[0.06]"
           >
             Ver blog
+          </Link>
+          <Link
+            href="/proyectos"
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:border-[#4dd4ff]/40 hover:bg-white/[0.06]"
+          >
+            Ver proyectos
           </Link>
         </div>
       </div>
