@@ -13,11 +13,11 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = buildMetadata({
-  title: "Blog tecnico",
+  title: "Blog técnico",
   description:
-    "Posts reales, automatizacion editorial y aprendizaje publico sobre interfaces, IA aplicada, conversion y construccion de producto.",
+    "Posts reales, automatización editorial y aprendizaje público sobre interfaces, IA aplicada, conversión y construcción de producto digital.",
   path: "/blog",
-  keywords: ["blog tecnico", "automatizacion editorial", "posts reales", "conversion web"],
+  keywords: ["blog técnico", "automatización editorial", "posts reales", "conversión web"],
 });
 
 export default function BlogPage() {

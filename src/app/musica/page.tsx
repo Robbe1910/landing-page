@@ -11,11 +11,11 @@ const slotLabels: Record<(typeof poetryEntries)[number]["slot"], string> = {
 };
 
 export const metadata: Metadata = buildMetadata({
-  title: "Musica y poesia",
+  title: "Música y poesía",
   description:
-    "La capa creativa de Robbe360: poesia breve, ritmo editorial diario y piezas cortas publicadas por franjas en horario de Espana.",
+    "La capa creativa de Robbe360: poesía breve, ritmo editorial diario y piezas cortas publicadas por franjas en horario de España.",
   path: "/musica",
-  keywords: ["musica y poesia", "poesia diaria", "creatividad de marca", "contenido editorial"],
+  keywords: ["música y poesía", "poesía diaria", "creatividad de marca", "contenido editorial"],
 });
 
 export default function MusicaPage() {
