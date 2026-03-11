@@ -1,7 +1,17 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+
+declare global {
+  interface Window {
+    instgrm?: {
+      Embeds?: {
+        process?: () => void;
+      };
+    };
+  }
+}
 
 const INSTAGRAM_POSTS: string[] = [
   "https://www.instagram.com/reel/DTP4XHmiLd5/",
@@ -16,11 +26,44 @@ type Props = {
   className?: string;
 };
 
+function processInstagramEmbeds(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const process = window.instgrm?.Embeds?.process;
+
+  if (typeof process !== "function") {
+    return false;
+  }
+
+  process();
+  return true;
+}
+
 export function InstagramEmbeds({ className }: Props) {
   const handleEmbedLoad = useCallback(() => {
-    if (typeof window === "undefined") return;
-    // @ts-expect-error - instgrm is injected by Instagram's embed script
-    window.instgrm?.Embeds?.process();
+    processInstagramEmbeds();
+  }, []);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    let attempts = 0;
+
+    const retryProcessing = () => {
+      if (processInstagramEmbeds() || attempts >= 12) {
+        return;
+      }
+
+      attempts += 1;
+      timeoutId = window.setTimeout(retryProcessing, 400);
+    };
+
+    retryProcessing();
+
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   return (
@@ -43,7 +86,11 @@ export function InstagramEmbeds({ className }: Props) {
                 data-instgrm-permalink={`${url}?utm_source=ig_web_copy_link`}
                 data-instgrm-version="14"
                 style={{ background: "#fff", border: 0, margin: 0, width: "100%" }}
-              />
+              >
+                <a href={url} target="_blank" rel="noreferrer">
+                  Ver publicación en Instagram
+                </a>
+              </blockquote>
             </div>
           ))}
         </div>
@@ -51,7 +98,7 @@ export function InstagramEmbeds({ className }: Props) {
 
       <Script
         src="https://www.instagram.com/embed.js"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         onLoad={handleEmbedLoad}
       />
     </div>

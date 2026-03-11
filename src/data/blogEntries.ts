@@ -1,3 +1,11 @@
+import {
+  addDays,
+  formatSpanishLongDate,
+  getDayShift,
+  parseIsoDateAtNoon,
+  toIsoDate,
+} from "../lib/madrid-time";
+
 export type BlogEntryType = "real" | "automated";
 
 export type BlogEntry = {
@@ -111,14 +119,17 @@ const realPosts: BlogEntry[] = [
   },
 ];
 
-const automatedPosts: BlogEntry[] = [
+type AutomatedBlogTemplate = Omit<BlogEntry, "date" | "publishedAt"> & {
+  baseDate: string;
+};
+
+const automatedPostTemplates: AutomatedBlogTemplate[] = [
   {
     slug: "automatizado-tendencias-web-negocios-locales-marzo-2026",
     title: "Automatizado: tendencias web para negocio local (semana actual)",
     excerpt:
       "Resumen semanal de patrones que están funcionando en captación, conversión y retención.",
-    date: "8 de marzo de 2026",
-    publishedAt: "2026-03-08",
+    baseDate: "2026-03-08",
     imageUrl: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg",
     imageAlt: "Equipo revisando panel de resultados",
     imageAuthor: "fauxels",
@@ -137,8 +148,7 @@ const automatedPosts: BlogEntry[] = [
     title: "Automatizado: IA aplicada al flujo diario de trabajo",
     excerpt:
       "Guía breve programada para ahorrar tiempo en redacción, soporte y seguimiento comercial.",
-    date: "8 de marzo de 2026",
-    publishedAt: "2026-03-08",
+    baseDate: "2026-03-08",
     imageUrl: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg",
     imageAlt: "Persona trabajando con laptop y analítica digital",
     imageAuthor: "ThisIsEngineering",
@@ -157,8 +167,7 @@ const automatedPosts: BlogEntry[] = [
     title: "Automatizado: checklist de conversión para una landing que vende",
     excerpt:
       "Plantilla nocturna con mejoras rápidas para subir contactos desde móvil y escritorio.",
-    date: "8 de marzo de 2026",
-    publishedAt: "2026-03-08",
+    baseDate: "2026-03-08",
     imageUrl: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
     imageAlt: "Pantalla con métricas y analítica de conversión",
     imageAuthor: "Pixabay",
@@ -179,10 +188,22 @@ const sortByDateDesc = (list: BlogEntry[]) =>
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 
-export const blogEntries: BlogEntry[] = [...realPosts, ...automatedPosts];
+function buildAutomatedPosts(now: Date = new Date()): BlogEntry[] {
+  return automatedPostTemplates.map((entry) => {
+    const shiftedDate = addDays(parseIsoDateAtNoon(entry.baseDate), getDayShift(entry.baseDate, now));
+
+    return {
+      ...entry,
+      date: formatSpanishLongDate(shiftedDate),
+      publishedAt: toIsoDate(shiftedDate),
+    };
+  });
+}
+
+export const blogEntries: BlogEntry[] = [...realPosts, ...buildAutomatedPosts()];
 
 export function getBlogEntryBySlug(slug: string): BlogEntry | undefined {
-  return blogEntries.find((entry) => entry.slug === slug);
+  return [...realPosts, ...buildAutomatedPosts()].find((entry) => entry.slug === slug);
 }
 
 export function getRealBlogEntries(): BlogEntry[] {
@@ -190,5 +211,5 @@ export function getRealBlogEntries(): BlogEntry[] {
 }
 
 export function getAutomatedBlogEntries(): BlogEntry[] {
-  return sortByDateDesc(automatedPosts);
+  return sortByDateDesc(buildAutomatedPosts());
 }
