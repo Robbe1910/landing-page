@@ -88,7 +88,7 @@ export function VideoLab() {
     <section className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 px-6 py-14 text-white">
       <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-lime-400">IA en vivo</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-[#4dd4ff]">IA en vivo</p>
           <h2 className="text-3xl font-semibold">Genera vídeo con Grok</h2>
           <ul className="grid gap-2 text-gray-200">
             <li>1. Escribe un prompt claro.</li>
@@ -103,13 +103,13 @@ export function VideoLab() {
         </div>
         <div className="rounded-2xl border border-gray-800 bg-black/60 p-6 shadow-xl">
           <form className="space-y-4" onSubmit={handleVideoSubmit} suppressHydrationWarning>
-            <textarea value={videoPrompt} onChange={(e) => setVideoPrompt(e.target.value)} placeholder="Ej: A glowing crystal-powered rocket launching from Mars..." className="w-full rounded-xl border border-gray-700 bg-gray-900 px-4 py-3 text-white placeholder:text-gray-500 focus:border-lime-400 focus:outline-none" rows={4} suppressHydrationWarning />
-            <input type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://..." className="w-full rounded-xl border border-gray-700 bg-gray-900 px-4 py-3 text-white placeholder:text-gray-500 focus:border-lime-400 focus:outline-none" suppressHydrationWarning />
-            <button type="submit" disabled={isGeneratingVideo} suppressHydrationWarning className="flex w-full items-center justify-center rounded-xl bg-lime-400 px-5 py-3 font-bold text-black transition hover:bg-lime-300 disabled:opacity-70">{isGeneratingVideo ? "Generando..." : "Generar vídeo con Grok"}</button>
+            <textarea value={videoPrompt} onChange={(e) => setVideoPrompt(e.target.value)} placeholder="Ej: A glowing crystal-powered rocket launching from Mars..." className="w-full rounded-xl border border-gray-700 bg-gray-900 px-4 py-3 text-white placeholder:text-gray-500 focus:border-[#4dd4ff] focus:outline-none" rows={4} suppressHydrationWarning />
+            <input type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://..." className="w-full rounded-xl border border-gray-700 bg-gray-900 px-4 py-3 text-white placeholder:text-gray-500 focus:border-[#4dd4ff] focus:outline-none" suppressHydrationWarning />
+            <button type="submit" disabled={isGeneratingVideo} suppressHydrationWarning className="flex w-full items-center justify-center rounded-xl bg-[linear-gradient(90deg,#3f66ff_0%,#2dd4ff_100%)] px-5 py-3 font-bold text-white transition hover:opacity-95 disabled:opacity-70">{isGeneratingVideo ? "Generando..." : "Generar vídeo con Grok"}</button>
           </form>
           <div className="mt-6 space-y-3">
             <p className="text-sm text-gray-300">Previsualización</p>
-            {videoUrl ? <div className="overflow-hidden rounded-xl border border-gray-800 bg-black"><video key={videoUrl} controls className="w-full" src={videoUrl} /><div className="flex flex-wrap items-center gap-3 bg-gray-950 px-4 py-3"><a href={videoUrl} download className="rounded-full bg-lime-400 px-4 py-2 text-sm font-semibold text-black hover:bg-lime-300">Descargar MP4</a><span className="text-xs text-gray-400">La URL es temporal, guárdala si quieres usarla luego.</span></div></div> : <div className="rounded-xl border border-dashed border-gray-700 bg-gray-900/60 px-4 py-10 text-center text-gray-500">Aún no hay vídeo. Genera uno y aparecerá aquí.</div>}
+            {videoUrl ? <div className="overflow-hidden rounded-xl border border-gray-800 bg-black"><video key={videoUrl} controls className="w-full" src={videoUrl} /><div className="flex flex-wrap items-center gap-3 bg-gray-950 px-4 py-3"><a href={videoUrl} download className="rounded-full bg-[linear-gradient(90deg,#3f66ff_0%,#2dd4ff_100%)] px-4 py-2 text-sm font-semibold text-white hover:opacity-95">Descargar MP4</a><span className="text-xs text-gray-400">La URL es temporal, guardala si quieres usarla luego.</span></div></div> : <div className="rounded-xl border border-dashed border-gray-700 bg-gray-900/60 px-4 py-10 text-center text-gray-500">Aún no hay vídeo. Genera uno y aparecerá aquí.</div>}
           </div>
         </div>
       </div>

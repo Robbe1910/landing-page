@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Alfa_Slab_One, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { siteConfig, siteStructuredData } from "../lib/site-config";
 import "./globals.css";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://robbe360.com";
-const siteName = "Robbe360";
-const defaultTitle = "Robbe360 | Desarrollo web para negocios locales";
-const defaultDescription =
-  "Landing pages y desarrollo web en React y Next.js para digitalizar negocios y conseguir mas clientes.";
-const ogImage = "/logo.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,54 +16,40 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const alfaSlabOne = Alfa_Slab_One({
-  variable: "--font-alfa-slab-one",
-  subsets: ["latin"],
-  weight: "400",
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: defaultTitle,
-    template: `%s | ${siteName}`,
+    default: siteConfig.defaultTitle,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: defaultDescription,
-  applicationName: siteName,
-  keywords: [
-    "desarrollo web",
-    "landing page",
-    "next.js",
-    "react",
-    "seo local",
-    "diseno web",
-    "freelance web",
-    "robbe360",
-  ],
-  authors: [{ name: "Roberto Berrendo Eguino", url: siteUrl }],
-  creator: "Roberto Berrendo Eguino",
-  publisher: siteName,
+  description: siteConfig.defaultDescription,
+  applicationName: siteConfig.name,
+  manifest: "/manifest.webmanifest",
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: siteConfig.author, url: siteConfig.url }],
+  creator: siteConfig.author,
+  publisher: siteConfig.name,
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    locale: "es_ES",
-    url: siteUrl,
-    siteName,
-    title: defaultTitle,
-    description: defaultDescription,
-    images: [{ url: ogImage, width: 5555, height: 5555, alt: "Robbe360" }],
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    images: [{ url: siteConfig.defaultOgImage, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
-    description: defaultDescription,
-    images: [ogImage],
-    creator: "@rxbbe8369",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    images: [siteConfig.defaultOgImage],
+    creator: siteConfig.twitterHandle,
   },
   other: {
-    "google-adsense-account": "ca-pub-7977064296204880",
+    "google-adsense-account": siteConfig.adsenseAccount,
   },
   robots: {
     index: true,
@@ -83,9 +63,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -94,39 +77,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: siteName,
-    url: siteUrl,
-    image: `${siteUrl}${ogImage}`,
-    description: defaultDescription,
-    email: "mailto:robertoberrendo@gmail.com",
-    sameAs: [
-      "https://www.instagram.com/rxbbe8369/",
-      "https://www.tiktok.com/@rxbbe8369",
-      "https://www.linkedin.com/in/roberto-berrendo-eguino-475b36171/",
-    ],
-    areaServed: "ES",
-  };
-
   return (
     <html lang="es">
       <head>
         <Script
           id="adsense-script"
           strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7977064296204880"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseAccount}`}
           crossOrigin="anonymous"
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${alfaSlabOne.variable} antialiased`}
-        suppressHydrationWarning
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
         />
         {children}
         <Analytics />

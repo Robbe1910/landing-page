@@ -16,13 +16,12 @@ export const poetryEntries: PoetryEntry[] = [
   {
     id: "poesia-desayuno-luz-quieta",
     title: "Luz quieta",
-    excerpt:
-      "Poema corto para arrancar el dia con calma y enfoque antes del desayuno.",
+    excerpt: "Poema corto para arrancar el día con calma y enfoque antes del desayuno.",
     lines: [
-      "La manana abre su puerta de lino,",
+      "La mañana abre su puerta de lino,",
       "el barrio respira sin ruido ni prisa,",
       "y en la taza tibia cabe un destino,",
-      "pequeno, firme, posible: sonreir.",
+      "pequeño, firme, posible: sonreír.",
     ],
     slot: "desayuno",
     targetMealTimeSpain: "08:30",
@@ -32,9 +31,8 @@ export const poetryEntries: PoetryEntry[] = [
   },
   {
     id: "poesia-comida-centro-del-dia",
-    title: "Centro del dia",
-    excerpt:
-      "Pieza de mediodia para resetear energia antes de la comida.",
+    title: "Centro del día",
+    excerpt: "Pieza de mediodía para resetear energía antes de la comida.",
     lines: [
       "A mitad del sol la calle se inclina,",
       "el pulso del mundo cambia de marcha,",
@@ -50,13 +48,12 @@ export const poetryEntries: PoetryEntry[] = [
   {
     id: "poesia-cena-ciudad-en-calma",
     title: "Ciudad en calma",
-    excerpt:
-      "Texto de cierre del dia para entrar en la cena con tono esperanzador.",
+    excerpt: "Texto de cierre del día para entrar en la cena con tono esperanzador.",
     lines: [
       "Cuando baja la tarde y cede el ruido,",
       "la noche cose el margen de las horas,",
-      "queda una luz pequena en lo vivido,",
-      "promesa de manana entre farolas.",
+      "queda una luz pequeña en lo vivido,",
+      "promesa de mañana entre farolas.",
     ],
     slot: "cena",
     targetMealTimeSpain: "21:30",

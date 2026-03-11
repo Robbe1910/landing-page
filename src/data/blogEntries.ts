@@ -4,8 +4,8 @@ export type BlogEntry = {
   slug: string;
   title: string;
   excerpt: string;
-  date: string; // Fecha visible
-  publishedAt: string; // ISO para ordenar
+  date: string;
+  publishedAt: string;
   imageUrl: string;
   imageAlt: string;
   imageAuthor: string;
@@ -32,7 +32,7 @@ const realPosts: BlogEntry[] = [
     viewsLabel: "Post real destacado",
     content: [
       "La UI del laboratorio de video ahora valida que el prompt no esté vacío y acepta una URL opcional de imagen antes de enviar a la API.",
-      "Mostramos el estado en vivo (pending, processing, complete) y cuando el video está listo se habilita la descarga directa en MP4.",
+      "Mostramos el estado en vivo y cuando el video está listo se habilita la descarga directa en MP4.",
       "Siguiente paso: guardar el historial de intentos para reutilizar prompts que funcionen mejor.",
     ],
   },
@@ -51,15 +51,14 @@ const realPosts: BlogEntry[] = [
     viewsLabel: "Post real muy visto",
     content: [
       "Documenté un wireframe repetible: héroe con promesa clara, bloque de prueba social y CTA de WhatsApp fijo.",
-      "El paquete incluye checklist de assets (logo, horario, oferta) y un guion corto para el primer email/post de lanzamiento.",
+      "El paquete incluye checklist de assets y un guion corto para el primer email o post de lanzamiento.",
       "Entrega estándar en 48h con una ronda de ajustes ligera para no frenar la salida.",
     ],
   },
   {
     slug: "actualizacion-real-clon-spotify-ui",
     title: "Actualización real: clon Spotify con reproductor fijo",
-    excerpt:
-      "Barra inferior estable, portada dinámica y estructura lista para conectar datos.",
+    excerpt: "Barra inferior estable, portada dinámica y estructura lista para conectar datos.",
     date: "1 de marzo de 2026",
     publishedAt: "2026-03-01",
     imageUrl: "https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg",
@@ -77,8 +76,7 @@ const realPosts: BlogEntry[] = [
   {
     slug: "actualizacion-real-clon-disney-carruseles",
     title: "Actualización real: clon Disney+ con carruseles fluidos",
-    excerpt:
-      "Navegación por catálogo y transiciones suaves para explorar sin saltos.",
+    excerpt: "Navegación por catálogo y transiciones suaves para explorar sin saltos.",
     date: "26 de febrero de 2026",
     publishedAt: "2026-02-26",
     imageUrl: "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg",
@@ -96,8 +94,7 @@ const realPosts: BlogEntry[] = [
   {
     slug: "actualizacion-real-kebab-house-conversion",
     title: "Actualización real: landing Kebab House enfocada a pedidos",
-    excerpt:
-      "Menú visual, CTA de WhatsApp y mapa para convertir visitas en pedidos reales.",
+    excerpt: "Menú visual, CTA de WhatsApp y mapa para convertir visitas en pedidos reales.",
     date: "22 de febrero de 2026",
     publishedAt: "2026-02-22",
     imageUrl: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
@@ -131,8 +128,8 @@ const automatedPosts: BlogEntry[] = [
     scheduleLabel: "Mañana",
     content: [
       "Prioriza pruebas con CTA repetido, prueba social visible y mensajes cortos que expliquen el valor en un scroll.",
-      "Los formatos que mejor responden son listas de 3 ítems y capturas reales del producto.",
-      "Recomendación: medir solo una métrica por sprint (leads o reservas) para no dispersar esfuerzos.",
+      "Los formatos que mejor responden son listas de tres ítems y capturas reales del producto.",
+      "Recomendación: medir solo una métrica por sprint para no dispersar esfuerzos.",
     ],
   },
   {
