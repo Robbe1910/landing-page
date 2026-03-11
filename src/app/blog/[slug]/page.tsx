@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { blogEntries, getBlogEntryBySlug } from "../../../data/blogEntries";
 import { absoluteUrl, buildMetadata } from "../../../lib/site-config";
 
+export const revalidate = 3600;
+
 type BlogDetailPageProps = {
   params: Promise<{ slug: string }>;
 };

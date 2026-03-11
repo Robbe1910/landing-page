@@ -1,4 +1,12 @@
 import newsArchiveJson from "./newsArchive.json";
+import {
+  DAY_MS,
+  addDays,
+  formatSpanishShortDate,
+  getMadridCalendarDate,
+  parseIsoDateAtNoon,
+  toIsoDate,
+} from "../lib/madrid-time";
 
 export type TimeRange = "day" | "week" | "month" | "year" | "all";
 
@@ -6,8 +14,8 @@ export type NewsItem = {
   id: string;
   title: string;
   summary: string;
-  date: string; // ISO (YYYY-MM-DD)
-  displayDate: string; // human readable
+  date: string;
+  displayDate: string;
   category: string;
   interest: string;
   sourceName: string;
@@ -16,17 +24,6 @@ export type NewsItem = {
 
 type ParsedNewsItem = NewsItem & { timestamp: number };
 
-const DAY_MS = 24 * 60 * 60 * 1000;
-
-const parsedNews: ParsedNewsItem[] = (newsArchiveJson as NewsItem[])
-  .map((item) => ({
-    ...item,
-    timestamp: new Date(item.date).getTime(),
-  }))
-  .sort((a, b) => b.timestamp - a.timestamp);
-
-export const newsArchive: ParsedNewsItem[] = parsedNews;
-
 const RANGE_TO_MS: Record<Exclude<TimeRange, "all">, number> = {
   day: DAY_MS,
   week: 7 * DAY_MS,
@@ -34,11 +31,43 @@ const RANGE_TO_MS: Record<Exclude<TimeRange, "all">, number> = {
   year: 365 * DAY_MS,
 };
 
+function getLatestSourceDate(items: NewsItem[]): string {
+  return [...items]
+    .sort((a, b) => parseIsoDateAtNoon(b.date).getTime() - parseIsoDateAtNoon(a.date).getTime())[0]
+    ?.date ?? toIsoDate(getMadridCalendarDate());
+}
+
+function buildRollingNews(now: Date = new Date()): ParsedNewsItem[] {
+  const baseItems = newsArchiveJson as NewsItem[];
+  const latestSourceDate = getLatestSourceDate(baseItems);
+  const dayShift = Math.round(
+    (getMadridCalendarDate(now).getTime() - parseIsoDateAtNoon(latestSourceDate).getTime()) / DAY_MS,
+  );
+
+  return baseItems
+    .map((item) => {
+      const shiftedDate = addDays(parseIsoDateAtNoon(item.date), dayShift);
+
+      return {
+        ...item,
+        date: toIsoDate(shiftedDate),
+        displayDate: formatSpanishShortDate(shiftedDate),
+        timestamp: shiftedDate.getTime(),
+      };
+    })
+    .sort((a, b) => b.timestamp - a.timestamp);
+}
+
+export const newsArchive: ParsedNewsItem[] = buildRollingNews();
+
 export function getNewsByRange(range: TimeRange, now: Date = new Date()): NewsItem[] {
-  if (range === "all") return newsArchive;
+  const items = buildRollingNews(now);
 
-  const maxAge = RANGE_TO_MS[range];
-  const cutoff = now.getTime() - maxAge;
+  if (range === "all") {
+    return items;
+  }
 
-  return newsArchive.filter((item) => item.timestamp >= cutoff);
+  const cutoff = getMadridCalendarDate(now).getTime() - RANGE_TO_MS[range];
+
+  return items.filter((item) => item.timestamp >= cutoff);
 }

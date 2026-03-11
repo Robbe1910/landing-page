@@ -10,6 +10,8 @@ import {
   getRealBlogEntries,
 } from "../../data/blogEntries";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = buildMetadata({
   title: "Blog tecnico",
   description:
