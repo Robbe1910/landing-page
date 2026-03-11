@@ -160,9 +160,34 @@ def draw_service_card(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int],
         bullet_y += 46
 
 
-def main() -> None:
-    OUTPUT_DIR.mkdir(exist_ok=True)
+def draw_service_row(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], service: dict[str, object]) -> None:
+    x1, y1, x2, y2 = box
+    draw.rounded_rectangle(box, radius=28, fill=(255, 255, 255, 11), outline=(255, 255, 255, 24), width=1)
+    draw_badge(draw, "PACK", x1 + 22, y1 + 18, (8, 21, 38, 225), CYAN)
+    draw_badge(draw, service["price"], x2 - 138, y1 + 18, (31, 22, 18, 230), AMBER_SOFT)
+    title_end = draw_lines(draw, service["title"], FONT_CARD_TITLE, WHITE, x1 + 22, y1 + 54, 320, line_gap=3, max_lines=1)
+    draw_lines(draw, service["desc"], FONT_TINY, MUTED, x1 + 22, title_end + 4, x2 - x1 - 210, line_gap=3, max_lines=1)
+    draw_lines(draw, service["bullets"][0], FONT_TINY, CYAN, x2 - 210, y1 + 56, 172, line_gap=3, max_lines=1)
 
+
+def draw_linkedin_card(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], service: dict[str, object]) -> None:
+    x1, y1, x2, y2 = box
+    draw.rounded_rectangle(box, radius=26, fill=(255, 255, 255, 10), outline=(255, 255, 255, 22), width=1)
+    draw_badge(draw, service["price"], x1 + 20, y1 + 18, (26, 20, 32, 228), AMBER_SOFT)
+    title_end = draw_lines(draw, service["title"], FONT_SEMIBOLD, WHITE, x1 + 20, y1 + 64, x2 - x1 - 40, line_gap=4, max_lines=2)
+    draw_lines(draw, service["desc"], FONT_TINY, MUTED, x1 + 20, title_end + 8, x2 - x1 - 40, line_gap=4, max_lines=3)
+
+
+def save_image(image: Image.Image, filename: str) -> None:
+    output_path = OUTPUT_DIR / filename
+    public_path = PUBLIC_DIR / filename
+    image.save(output_path)
+    image.save(public_path)
+    print(f"Saved {output_path}")
+    print(f"Saved {public_path}")
+
+
+def make_core_preview() -> Image.Image:
     canvas = vertical_gradient(WIDTH, HEIGHT, BG_TOP, BG_BOTTOM)
     add_glow(canvas, (220, 150), 220, BLUE, 82)
     add_glow(canvas, (896, 220), 200, CYAN, 70)
@@ -293,13 +318,205 @@ def main() -> None:
     draw.text((748, footer_y + 11), "robbe360.com", font=FONT_TINY, fill=CYAN)
 
     canvas.alpha_composite(overlay)
+    return canvas
 
-    output_path = OUTPUT_DIR / "rrss-layout-preview.png"
-    public_path = PUBLIC_DIR / "rrss-layout-preview.png"
-    canvas.save(output_path)
-    canvas.save(public_path)
-    print(f"Saved {output_path}")
-    print(f"Saved {public_path}")
+
+def make_instagram_variant() -> Image.Image:
+    canvas = vertical_gradient(WIDTH, HEIGHT, (7, 8, 22), (13, 18, 40))
+    add_glow(canvas, (180, 140), 220, BLUE, 90)
+    add_glow(canvas, (884, 180), 180, AMBER, 58)
+    add_glow(canvas, (780, 1120), 250, CYAN, 64)
+    add_grid(canvas, spacing=48, opacity=12)
+
+    overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    draw.rounded_rectangle((56, 42, 1024, 1288), radius=44, fill=(5, 14, 30, 178), outline=(255, 255, 255, 20), width=1)
+
+    draw.text((98, 86), "INSTAGRAM  |  VERSION COMERCIAL", font=FONT_TINY, fill=AMBER_SOFT)
+    title_end = draw_lines(
+        draw,
+        "Una web que se entiende rapido vende mejor.",
+        FONT_TITLE,
+        WHITE,
+        98,
+        118,
+        860,
+        line_gap=6,
+        max_lines=3,
+    )
+    draw_lines(
+        draw,
+        "Concepto mas directo para captar curiosos, explicar los packs y empujar al CTA desde el primer vistazo.",
+        FONT_BODY,
+        MUTED,
+        98,
+        title_end + 12,
+        760,
+        line_gap=6,
+        max_lines=3,
+    )
+
+    main_box = (98, 326, 982, 1236)
+    draw.rounded_rectangle(main_box, radius=36, fill=(8, 21, 38, 248), outline=(255, 255, 255, 28), width=1)
+    draw.rounded_rectangle((98, 326, 982, 384), radius=36, fill=(255, 255, 255, 14))
+    for idx, color in enumerate(((255, 96, 92), (255, 189, 68), (0, 202, 78))):
+        x = 130 + idx * 24
+        draw.ellipse((x, 348, x + 12, 360), fill=color)
+    draw.text((200, 342), "robbe360.com", font=FONT_SMALL, fill=(220, 232, 245))
+
+    logo = Image.open(PUBLIC_DIR / "logo.png").convert("RGBA")
+    logo.thumbnail((56, 56))
+    overlay.alpha_composite(logo, (128, 414))
+    draw.text((196, 418), "Robbe360", font=FONT_SEMIBOLD, fill=WHITE)
+    draw.text((196, 448), "Webs claras. CTA directo. Producto util.", font=FONT_SMALL, fill=MUTED)
+    draw_badge(draw, "WHATSAPP DIRECTO", 786, 418, (64, 106, 255, 236), WHITE)
+
+    hero_top = 512
+    draw_badge(draw, "WEBS PARA CAPTAR CLIENTES", 128, hero_top, (9, 23, 40, 220), CYAN)
+    hero_end = draw_lines(
+        draw,
+        "Desarrollo, estructura y oferta para que el negocio se entienda y la gente escriba.",
+        FONT_H2,
+        WHITE,
+        128,
+        hero_top + 52,
+        430,
+        line_gap=6,
+        max_lines=4,
+    )
+    copy_end = draw_lines(
+        draw,
+        "Aqui se ve el negocio, lo que ofreces, cuanto cuesta y donde escribirte.",
+        FONT_SMALL,
+        MUTED,
+        128,
+        hero_end + 14,
+        430,
+        line_gap=6,
+        max_lines=3,
+    )
+    draw_button(draw, "Quiero mi landing", (128, copy_end + 18, 352, copy_end + 68), (63, 102, 255, 255), (63, 102, 255, 255), WHITE)
+    draw_button(draw, "Ver packs", (368, copy_end + 18, 516, copy_end + 68), (255, 255, 255, 12), (255, 255, 255, 26), WHITE)
+
+    visual_box = (594, 498, 920, 770)
+    draw.rounded_rectangle(visual_box, radius=34, fill=(255, 255, 255, 10), outline=(255, 255, 255, 22), width=1)
+    draw_badge(draw, "IDENTIDAD VISUAL + TECNICA", 620, 522, (10, 25, 42, 224), CYAN)
+    draw_badge(draw, "PRECIOS VISIBLES", 736, 708, (26, 20, 32, 228), AMBER_SOFT)
+    wolf = Image.open(PUBLIC_DIR / "wolf888-clean.webp").convert("RGBA")
+    wolf.thumbnail((264, 232))
+    add_glow(overlay, (760, 632), 104, CYAN, 72)
+    overlay.alpha_composite(wolf, (622, 558))
+
+    draw.rounded_rectangle((128, 814, 920, 864), radius=24, fill=(9, 23, 40, 220), outline=(255, 255, 255, 18), width=1)
+    draw.text((152, 829), "SERVICIOS LISTOS PARA VENDER", font=FONT_TINY, fill=AMBER_SOFT)
+    draw.text((426, 824), "Rows mas agresivas para feed, ads o portada de perfil.", font=FONT_SMALL, fill=MUTED)
+
+    instagram_services = [
+        {"title": "Landing 48h", "price": "590 EUR", "desc": "Landing clara y CTA para salir rapido.", "bullets": ["Copy base y CTA"]},
+        {"title": "Automatizacion IA", "price": "490 EUR", "desc": "Flujo simple para quitar tareas.", "bullets": ["Diagnostico y flujo"]},
+        {"title": "Web local WhatsApp", "price": "690 EUR", "desc": "Mapa, horario y conversion movil.", "bullets": ["WhatsApp y mapa"]},
+    ]
+
+    row_top = 870
+    row_height = 100
+    for index, service in enumerate(instagram_services):
+        y1 = row_top + index * 106
+        draw_service_row(draw, (128, y1, 920, y1 + row_height), service)
+
+    draw.rounded_rectangle((128, 1198, 920, 1230), radius=16, fill=(63, 102, 255, 230), outline=(63, 102, 255, 230), width=1)
+    draw.text((154, 1204), "Escribeme y te monto una preview con tu negocio real.", font=FONT_SMALL, fill=WHITE)
+
+    canvas.alpha_composite(overlay)
+    return canvas
+
+
+def make_linkedin_variant() -> Image.Image:
+    width = 1200
+    height = 675
+    canvas = vertical_gradient(width, height, (8, 12, 22), (14, 22, 36))
+    add_glow(canvas, (210, 120), 180, BLUE, 70)
+    add_glow(canvas, (980, 120), 160, CYAN, 52)
+    add_glow(canvas, (980, 550), 180, AMBER, 36)
+    add_grid(canvas, spacing=56, opacity=10)
+
+    overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    draw.rounded_rectangle((30, 26, 1170, 649), radius=34, fill=(7, 16, 30, 188), outline=(255, 255, 255, 18), width=1)
+    draw.text((72, 64), "LINKEDIN  |  VERSION LIMPIA", font=FONT_TINY, fill=CYAN)
+    title_end = draw_lines(
+        draw,
+        "Desarrollo web, automatizacion y producto con una presentacion mas premium.",
+        FONT_H2,
+        WHITE,
+        72,
+        98,
+        504,
+        line_gap=6,
+        max_lines=4,
+    )
+    copy_end = draw_lines(
+        draw,
+        "Pensada para LinkedIn: menos ruido visual, mas claridad, servicios visibles y un look mas serio sin perder personalidad.",
+        FONT_SMALL,
+        MUTED,
+        72,
+        title_end + 10,
+        500,
+        line_gap=6,
+        max_lines=4,
+    )
+
+    draw_badge(draw, "ROBBE360", 72, copy_end + 18, (9, 23, 40, 220), WHITE)
+    draw_badge(draw, "PRECISION DIGITAL", 188, copy_end + 18, (26, 20, 32, 226), AMBER_SOFT)
+
+    mockup = (674, 80, 1118, 360)
+    draw.rounded_rectangle(mockup, radius=28, fill=(8, 21, 38, 246), outline=(255, 255, 255, 22), width=1)
+    draw.rounded_rectangle((674, 80, 1118, 132), radius=28, fill=(255, 255, 255, 12))
+    for idx, color in enumerate(((255, 96, 92), (255, 189, 68), (0, 202, 78))):
+        x = 700 + idx * 22
+        draw.ellipse((x, 100, x + 10, 110), fill=color)
+    draw.text((760, 94), "robbe360.com", font=FONT_SMALL, fill=(220, 232, 245))
+
+    logo = Image.open(PUBLIC_DIR / "logo.png").convert("RGBA")
+    logo.thumbnail((46, 46))
+    overlay.alpha_composite(logo, (706, 154))
+    draw.text((766, 156), "Robbe360", font=FONT_SEMIBOLD, fill=WHITE)
+    draw.text((766, 184), "Servicios digitales con criterio y estructura.", font=FONT_TINY, fill=MUTED)
+    draw_badge(draw, "WEB + IA + PRODUCTO", 896, 156, (9, 23, 40, 220), CYAN)
+
+    wolf = Image.open(PUBLIC_DIR / "wolf888-clean.webp").convert("RGBA")
+    wolf.thumbnail((196, 174))
+    add_glow(overlay, (920, 262), 80, CYAN, 64)
+    overlay.alpha_composite(wolf, (850, 176))
+    draw.rounded_rectangle((706, 238, 824, 284), radius=18, fill=(255, 255, 255, 10), outline=(255, 255, 255, 20), width=1)
+    draw.text((728, 252), "Landing Sprint", font=FONT_SMALL, fill=WHITE)
+    draw.rounded_rectangle((706, 294, 824, 340), radius=18, fill=(255, 255, 255, 10), outline=(255, 255, 255, 20), width=1)
+    draw.text((728, 308), "Automatizacion", font=FONT_SMALL, fill=WHITE)
+
+    info_y = 376
+    draw.rounded_rectangle((72, info_y, 1130, info_y + 34), radius=17, fill=(255, 255, 255, 10), outline=(255, 255, 255, 14), width=1)
+    draw.text((90, info_y + 10), "Servicios con precio visible, propuesta clara y salida real para negocio o proyecto.", font=FONT_TINY, fill=(219, 232, 245))
+
+    card_y = 428
+    card_w = 324
+    gap = 20
+    for index, service in enumerate(SERVICES):
+        x1 = 72 + index * (card_w + gap)
+        draw_linkedin_card(draw, (x1, card_y, x1 + card_w, 604), service)
+
+    draw.rounded_rectangle((72, 616, 1130, 638), radius=11, fill=(255, 255, 255, 10))
+    draw.text((88, 621), "robbe360.com  |  identidad visual  |  servicios con CTA  |  enfoque mas premium para LinkedIn", font=FONT_TINY, fill=MUTED)
+
+    canvas.alpha_composite(overlay)
+    return canvas
+
+
+def main() -> None:
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    save_image(make_core_preview(), "rrss-layout-preview.png")
+    save_image(make_instagram_variant(), "rrss-instagram-agresiva.png")
+    save_image(make_linkedin_variant(), "rrss-linkedin-premium.png")
 
 
 if __name__ == "__main__":
